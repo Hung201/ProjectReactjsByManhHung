@@ -1,0 +1,107 @@
+.login-background {
+    background-color: #7f7f7f;
+    height          : 100vh;
+
+    .login-container {
+        margin          : auto;
+        width           : 380px;
+        height          : 440px;
+        background-color: white;
+        border-radius   : 5px;
+        position        : absolute;
+        top             : 0;
+        bottom          : 0;
+        right           : 0;
+        left            : 0;
+
+
+        .login-content {
+            padding: 25px 20px;
+
+            .text-login {
+                font-size     : 24px;
+                padding-bottom: 10px;
+            }
+
+            .form-control {
+                width : 95%;
+                margin: 8px;
+            }
+
+            .form-password {
+                .eye-show-hide {
+                    position: absolute;
+                    right   : 38px;
+                    top     : 136px;
+                }
+            }
+
+            .btn-login-content {
+                width        : 95%;
+                margin-left  : 8px;
+                margin-top   : 5px;
+                border-radius: 50px;
+            }
+
+            .text-social-network {
+                margin-top: 15px;
+            }
+
+            .forgot-password {
+                margin-left: 10px;
+            }
+
+            .social-network {
+                display        : flex;
+                justify-content: center;
+                padding-top    : 15px;
+
+                .google {
+                    background     : #dc5252;
+                    font-size      : 25px;
+                    border-radius  : 50%;
+                    height         : 50px;
+                    width          : 50px;
+                    display        : flex;
+                    justify-content: center;
+                    align-items    : center;
+                    color          : white;
+                    margin-right   : 15px;
+                }
+
+                .facebook {
+                    background     : #535fe3;
+                    font-size      : 25px;
+                    border-radius  : 50%;
+                    height         : 50px;
+                    width          : 50px;
+                    display        : flex;
+                    justify-content: center;
+                    align-items    : center;
+                    color          : white;
+                    margin-right   : 15px;
+                }
+
+                .twitter {
+                    background     : #63aaf1;
+                    font-size      : 25px;
+                    border-radius  : 50%;
+                    height         : 50px;
+                    width          : 50px;
+                    display        : flex;
+                    justify-content: center;
+                    align-items    : center;
+                    color          : white;
+                }
+            }
+
+            .footer-signup {
+                margin-top: 30px;
+
+                .signup-section {
+                    .text-info {}
+                }
+            }
+        }
+    }
+}
