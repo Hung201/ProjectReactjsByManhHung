@@ -30,10 +30,16 @@
 
             .form-password {
                 .eye-show-hide {
+                    cursor  : pointer;
                     position: absolute;
                     right   : 38px;
                     top     : 136px;
                 }
+            }
+
+            .form-error {
+                color       : rgb(255, 50, 50);
+                padding-left: 18px
             }
 
             .btn-login-content {
@@ -57,6 +63,7 @@
                 padding-top    : 15px;
 
                 .google {
+                    cursor         : pointer;
                     background     : #dc5252;
                     font-size      : 25px;
                     border-radius  : 50%;
@@ -70,6 +77,7 @@
                 }
 
                 .facebook {
+                    cursor         : pointer;
                     background     : #535fe3;
                     font-size      : 25px;
                     border-radius  : 50%;
@@ -83,6 +91,7 @@
                 }
 
                 .twitter {
+                    cursor         : pointer;
                     background     : #63aaf1;
                     font-size      : 25px;
                     border-radius  : 50%;

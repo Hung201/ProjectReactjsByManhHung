@@ -4,26 +4,27 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
-
+import { handleLoginApi } from '../../services/userService';
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
-            userPassword: '',
-            isShowHidePassword: false
+            username: '',
+            password: '',
+            isShowHidePassword: false,
+            errMessage: ''
         }
     }
     handleUserNameOnChangeInput = (event) => {
         this.setState({
-            userName: event.target.value
+            username: event.target.value
         })
     }
 
     handleUserPasswordOnChangeInput = (event) => {
         this.setState({
-            userPassword: event.target.value
+            password: event.target.value
         })
     }
 
@@ -36,6 +37,35 @@ class Login extends Component {
             isShowHidePassword: !this.state.isShowHidePassword
         })
     }
+
+    handleLoginOnClick = async () => {
+        this.setState({
+            errMessage: ''
+        })
+        try {
+            let data = await handleLoginApi(this.state.username, this.state.password);
+            if (data && data.errCode !== 0) {
+                this.setState({
+                    errMessage: data.errMessage
+                })
+            }
+            if (data && data.errCode === 0) {
+                this.props.userLoginSuccess(data.user)
+            }
+
+
+        } catch (error) {
+            if (error.response) {
+                if (error.response.data) {
+                    this.setState({
+                        errMessage: error.response.data.errMessage
+                    })
+                }
+            }
+
+        }
+
+    }
     render() {
         return (
             <div className='login-background'>
@@ -47,7 +77,7 @@ class Login extends Component {
                                 type='text'
                                 className='form-control'
                                 placeholder="Your name..."
-                                value={this.state.userName}
+                                value={this.state.username}
                                 onChange={(event) => this.handleUserNameOnChangeInput(event)}
                             />
                         </div>
@@ -55,7 +85,7 @@ class Login extends Component {
                             <input type={this.state.isShowHidePassword === true ? 'text' : 'password'}
                                 className='form-control'
                                 placeholder="Your password..."
-                                value={this.state.userPassword}
+                                value={this.state.password}
                                 onChange={(event) => this.handleUserPasswordOnChangeInput(event)}
                             />
                             <div className='eye-show-hide'
@@ -63,6 +93,9 @@ class Login extends Component {
                                 {this.state.isShowHidePassword === true ?
                                     <i className="far fa-eye "></i> : <i class="far fa-eye-slash"></i>}
                             </div>
+                        </div>
+                        <div className='col-12 form-error' >
+                            {this.state.errMessage}
                         </div>
                         <div className='col-12 form-btn'>
                             <button
@@ -101,8 +134,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
+        // userLoginFail: () => dispatch(actions.adminLoginFail()),
     };
 };
 
