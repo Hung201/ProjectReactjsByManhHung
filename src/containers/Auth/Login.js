@@ -91,7 +91,7 @@ class Login extends Component {
                             <div className='eye-show-hide'
                                 onClick={() => this.handleShowHideOnCLick()}>
                                 {this.state.isShowHidePassword === true ?
-                                    <i className="far fa-eye "></i> : <i class="far fa-eye-slash"></i>}
+                                    <i className="far fa-eye "></i> : <i className="far fa-eye-slash"></i>}
                             </div>
                         </div>
                         <div className='col-12 form-error' >
@@ -107,7 +107,7 @@ class Login extends Component {
                         <div className='col-12 text-muted delimiter text-social-network'>
                             <span className='forgot-password'>Forgot your password?</span>
                         </div>
-                        <div class="col-12 text-center text-muted delimiter text-social-network">
+                        <div className="col-12 text-center text-muted delimiter text-social-network">
                             <span> or use a social network</span>
                         </div>
                         <div className='col-12 social-network'>
