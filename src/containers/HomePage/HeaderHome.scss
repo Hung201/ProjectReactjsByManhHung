@@ -73,14 +73,16 @@
         }
 
         .content-right {
-            width  : 24%;
-            height : 100%;
-            display: flex;
+            width      : 24%;
+            height     : 100%;
+            display    : flex;
+            align-items: center;
+            position   : relative;
 
 
             .support {
-                width : 40%;
-                margin: 10px 75px;
+                width : 20%;
+                margin: 10px 45px;
 
                 .question-icon {
                     padding: 0 13px;
@@ -88,6 +90,23 @@
 
                 .sp-text {}
 
+            }
+
+            .vi-language {
+                padding: 0 10px;
+                cursor : pointer;
+
+                &:active {
+                    color: #f61414;
+                }
+            }
+
+            .en-language {
+                cursor: pointer;
+
+                &:active {
+                    color: blue;
+                }
             }
 
             .icon-right {
@@ -143,6 +162,10 @@
         text-align : center;
         padding-top: 60px;
 
+
+
+
+
         .detail {
             width           : 170px;
             height          : 50px;
@@ -152,6 +175,11 @@
             color           : #fff;
             font-size       : 18px;
             text-shadow     : 1px 1px 1px #333;
+
+            &:hover {
+                background: #e33737;
+                font-size : 90%;
+            }
 
         }
     }
@@ -192,6 +220,10 @@
             .text-child {
                 font-weight: bold;
                 font-size  : 18px;
+
+                &:hover {
+                    color: #49bce2;
+                }
             }
         }
     }
