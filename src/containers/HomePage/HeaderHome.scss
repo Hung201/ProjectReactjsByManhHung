@@ -95,17 +95,34 @@
             .vi-language {
                 padding: 0 10px;
                 cursor : pointer;
+                opacity: 0.2;
 
-                &:active {
-                    color: #f61414;
+
+                &:hover {
+                    opacity: 1;
+                    color  : #f61414;
+                }
+
+                &.active {
+                    color  : #f61414;
+                    opacity: 1;
+
                 }
             }
 
             .en-language {
-                cursor: pointer;
+                cursor : pointer;
+                opacity: 0.2;
 
-                &:active {
-                    color: blue;
+
+                &:hover {
+                    opacity: 1;
+                    color  : blue;
+                }
+
+                &.active {
+                    color  : blue;
+                    opacity: 1;
                 }
             }
 

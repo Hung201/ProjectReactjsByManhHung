@@ -31,6 +31,11 @@ const appReducer = (state = initialState, action) => {
                     ...action.contentOfConfirmModal
                 }
             }
+        case actionTypes.CHAGE_LANGUAGE_APP:
+            return {
+                ...state,
+                language: action.language
+            }
         default:
             return state;
     }

@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './HeaderHome.scss';
 import { FormattedMessage } from 'react-intl';
+import { LANGUAGES } from '../../utils/constant';
+import { changeLanguageApp } from '../../store/actions/appActions';
 
 
 class HeaderHome extends Component {
+    changeLanguageApp = (language) => {
+        this.props.changeLanguageAppRedux(language)
+    }
 
     render() {
-        console.log('check props: ', this.props)
+        let language = this.props.language
+        console.log(language)
         return (
             <>
                 <div className='home-header-container'>
@@ -53,8 +59,8 @@ class HeaderHome extends Component {
                                 <i className="fas fa-question-circle question-icon"></i>
                                 <div className='sp-text'><FormattedMessage id="headerhome.support" /></div>
                             </div>
-                            <div className='vi-language'>VN</div>
-                            <div className='en-language'>EN</div>
+                            <div className={language === LANGUAGES.VI ? 'vi-language active' : 'vi-language'} ><span onClick={() => this.changeLanguageApp(LANGUAGES.VI)}>VN</span></div>
+                            <div className={language === LANGUAGES.EN ? 'en-language active' : 'en-language'}><span onClick={() => this.changeLanguageApp(LANGUAGES.EN)}>EN</span></div>
                             <div className='icon-right'>
                                 <i className="fas fa-adjust light-icon"></i>
                                 <i className="fas fa-user-circle user-icon"></i>
@@ -104,12 +110,13 @@ class HeaderHome extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        lang: state.app.language
+        language: state.app.language
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };
 
