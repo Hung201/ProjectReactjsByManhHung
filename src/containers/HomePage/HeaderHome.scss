@@ -5,6 +5,10 @@
     background-color: #f8f9fa;
     padding         : 0 100px;
     border-bottom   : 1px solid #eae9e9;
+    position        : sticky;
+    top             : 0;
+    background      : white;
+    z-index         : 1000;
 
     .home-page-content {
         height : 100%;
@@ -151,11 +155,12 @@
 }
 
 .home-header-banner {
-    background           : url('../../assets/images/banner.svg');
-    background-attachment: fixed;
-    background-repeat    : no-repeat;
-    background-size      : cover;
-    height               : 700px;
+    background         : url('../../assets/images/banner.svg');
+    background-color   : #fff;
+    background-repeat  : no-repeat;
+    background-position: center;
+    background-size    : cover;
+    height             : 650px;
 
     .title1 {
         text-align    : center;
@@ -243,5 +248,9 @@
                 }
             }
         }
+    }
+
+    .light-image {
+        background-image: linear-gradient(rgba(255, 255, 255, -0.9), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
     }
 }

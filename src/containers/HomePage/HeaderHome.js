@@ -100,6 +100,7 @@ class HeaderHome extends Component {
                             <div className='text-child'><FormattedMessage id="home-header-banner.text-child-6" /></div>
                         </div>
                     </div>
+                    <div className='light-image' style={{ height: '187px' }}></div>
                 </div>
             </>
         );
