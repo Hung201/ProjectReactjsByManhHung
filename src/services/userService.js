@@ -24,6 +24,11 @@ const editUserService = (user) => {
     return axios.put("api/edit-user", user);
 }
 
+const getAllcodeService = (type) => {
+    return axios.get(`/api/get-allcodes?type=${type}`)
+}
+
 export {
-    handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserService
+    handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserService,
+    getAllcodeService
 }

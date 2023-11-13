@@ -11,6 +11,7 @@ import Handbook from './Handbook';
 import About from './About';
 import HomeFooter from './HomeFooter';
 
+
 class HomePage extends Component {
 
     render() {
