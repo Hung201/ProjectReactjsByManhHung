@@ -4,6 +4,8 @@ import './HeaderHome.scss';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from '../../utils/constant';
 import { changeLanguageApp } from '../../store/actions/appActions';
+import { withRouter } from 'react-router';
+
 
 
 class HeaderHome extends Component {
@@ -11,16 +13,23 @@ class HeaderHome extends Component {
         this.props.changeLanguageAppRedux(language)
     }
 
+    returnToHome = () => {
+        if (this.props.history) {
+            this.props.history.push(`/home`)
+        }
+    }
+
     render() {
         let language = this.props.language
         console.log(language)
         return (
             <>
+
                 <div className='home-header-container'>
                     <div className='home-page-content'>
                         <div className='content-left'>
                             <i className="fas fa-bars bars"></i>
-                            <div className='text-home'>
+                            <div className='text-home' onClick={() => this.returnToHome()}>
                                 Home
                             </div>
                         </div>
@@ -68,40 +77,42 @@ class HeaderHome extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='home-header-banner'>
-                    <div className='title1'><FormattedMessage id="home-header-banner.title-1" /></div>
-                    <div className='title2'><FormattedMessage id="home-header-banner.title-2" /></div>
-                    <div className='get-started'>
-                        <button type="button" className="btn detail"><FormattedMessage id="home-header-banner.view-detail" /> &nbsp; <span><i className="fas fa-chevron-down"></i></span> </button>
+                {this.props.isShowBanner === true &&
+                    <div className='home-header-banner'>
+                        <div className='title1'><FormattedMessage id="home-header-banner.title-1" /></div>
+                        <div className='title2'><FormattedMessage id="home-header-banner.title-2" /></div>
+                        <div className='get-started'>
+                            <button type="button" className="btn detail"><FormattedMessage id="home-header-banner.view-detail" /> &nbsp; <span><i className="fas fa-chevron-down"></i></span> </button>
+                        </div>
+                        <div className='options'>
+                            <div className='options-child'>
+                                <div className='icon-child'><i className="far fa-hospital"></i></div>
+                                <div className='text-child'><FormattedMessage id="home-header-banner.text-child-1" /></div>
+                            </div>
+                            <div className='options-child'>
+                                <div className='icon-child'><i className="fas fa-mobile-alt"></i></div>
+                                <div className='text-child'><FormattedMessage id="home-header-banner.text-child-2" /></div>
+                            </div>
+                            <div className='options-child'>
+                                <div className='icon-child'><i className="fas fa-hospital-alt"></i></div>
+                                <div className='text-child'><FormattedMessage id="home-header-banner.text-child-3" /></div>
+                            </div>
+                            <div className='options-child'>
+                                <div className='icon-child'><i className="fas fa-vial"></i></div>
+                                <div className='text-child'><FormattedMessage id="home-header-banner.text-child-4" /></div>
+                            </div>
+                            <div className='options-child'>
+                                <div className='icon-child'><i className="fas fa-user-shield"></i></div>
+                                <div className='text-child'><FormattedMessage id="home-header-banner.text-child-5" /></div>
+                            </div>
+                            <div className='options-child'>
+                                <div className='icon-child'><i className="far fa-address-card"></i></div>
+                                <div className='text-child'><FormattedMessage id="home-header-banner.text-child-6" /></div>
+                            </div>
+                        </div>
+                        <div className='light-image' style={{ height: '187px' }}></div>
                     </div>
-                    <div className='options'>
-                        <div className='options-child'>
-                            <div className='icon-child'><i className="far fa-hospital"></i></div>
-                            <div className='text-child'><FormattedMessage id="home-header-banner.text-child-1" /></div>
-                        </div>
-                        <div className='options-child'>
-                            <div className='icon-child'><i className="fas fa-mobile-alt"></i></div>
-                            <div className='text-child'><FormattedMessage id="home-header-banner.text-child-2" /></div>
-                        </div>
-                        <div className='options-child'>
-                            <div className='icon-child'><i className="fas fa-hospital-alt"></i></div>
-                            <div className='text-child'><FormattedMessage id="home-header-banner.text-child-3" /></div>
-                        </div>
-                        <div className='options-child'>
-                            <div className='icon-child'><i className="fas fa-vial"></i></div>
-                            <div className='text-child'><FormattedMessage id="home-header-banner.text-child-4" /></div>
-                        </div>
-                        <div className='options-child'>
-                            <div className='icon-child'><i className="fas fa-user-shield"></i></div>
-                            <div className='text-child'><FormattedMessage id="home-header-banner.text-child-5" /></div>
-                        </div>
-                        <div className='options-child'>
-                            <div className='icon-child'><i className="far fa-address-card"></i></div>
-                            <div className='text-child'><FormattedMessage id="home-header-banner.text-child-6" /></div>
-                        </div>
-                    </div>
-                    <div className='light-image' style={{ height: '187px' }}></div>
-                </div>
+                }
             </>
         );
     }
@@ -121,4 +132,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderHome);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderHome));

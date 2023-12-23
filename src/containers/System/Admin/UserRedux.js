@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserRedux.scss';
 // import { getAllcodeService } from '../../../services/userService';
-import { LANGUAGES, MANAGE_ACTIONS } from '../../../utils/constant';
+import { LANGUAGES, MANAGE_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from "../../../store/actions";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
@@ -35,7 +35,7 @@ class UserRedux extends Component {
             userId: ''
         }
     }
-    async componentDidMount() {
+    componentDidMount() {
         this.props.fetchGenderStart();
         this.props.fetchRoleStart();
         this.props.fetchPositionStart();
@@ -45,7 +45,7 @@ class UserRedux extends Component {
             let arrGenders = this.props.genderRedux
             this.setState({
                 genderArr: arrGenders,
-                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : '',
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : '',
             })
         }
 
@@ -53,7 +53,7 @@ class UserRedux extends Component {
             let arrRoles = this.props.roleRedux
             this.setState({
                 roleArr: arrRoles,
-                role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : '',
+                role: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : '',
             })
         }
 
@@ -61,11 +61,14 @@ class UserRedux extends Component {
             let arrPositions = this.props.positionRedux
             this.setState({
                 positionArr: arrPositions,
-                position: arrPositions && arrPositions.length > 0 ? arrPositions[0].key : '',
+                position: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : '',
             })
         }
 
         if (prevProps.users !== this.props.users) {
+            let arrGenders = this.props.genderRedux
+            let arrRoles = this.props.roleRedux
+            let arrPositions = this.props.positionRedux
             this.setState({
                 email: '',
                 password: '',
@@ -73,24 +76,27 @@ class UserRedux extends Component {
                 lastName: '',
                 phoneNumber: '',
                 address: '',
-                gender: '',
-                position: '',
-                role: '',
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : '',
+                position: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : '',
+                role: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : '',
                 avatar: '',
                 action: MANAGE_ACTIONS.CREATE,
+                previewImage: ''
             })
         }
 
 
     }
 
-    handleOnchangeImage = (event) => {
+    handleOnchangeImage = async (event) => {
         let data = event.target.files
         let file = data[0]
         if (file) {
+            let base64 = await CommonUtils.getBase64(file)
             let objectUrl = URL.createObjectURL(file)
             this.setState({
-                previewImage: objectUrl
+                previewImage: objectUrl,
+                avatar: base64
             })
         }
 
@@ -172,6 +178,10 @@ class UserRedux extends Component {
     }
 
     editUserFromParent = (user) => {
+        let imageBase64 = ''
+        if (user.image) {
+            imageBase64 = new Buffer(user.image, 'base64').toString('binary')
+        }
         this.setState({
             email: user.email,
             password: 'HARDCODE',
@@ -182,7 +192,8 @@ class UserRedux extends Component {
             gender: user.gender,
             position: user.positionId,
             role: user.roleId,
-            avatar: user.avatar,
+            avatar: '',
+            previewImage: imageBase64,
             action: MANAGE_ACTIONS.EDIT,
             userId: user.id
         })
@@ -195,7 +206,6 @@ class UserRedux extends Component {
         let positions = this.props.positionRedux;
         let { email, password, firstName, lastName, phoneNumber,
             address, gender, position, role, avatar, action } = this.state
-        console.log('check state: ', this.state)
         return (
             <>
                 <div className="user-redux-container" >
@@ -268,7 +278,7 @@ class UserRedux extends Component {
                                         {genders && genders.length > 0 &&
                                             genders.map((item, index) => {
                                                 return (
-                                                    <option key={index} value={item.key}>
+                                                    <option key={index} value={item.keyMap}>
                                                         {language === LANGUAGES.VI ? item.ValueVi : item.valueEn}
                                                     </option>
                                                 )
@@ -284,7 +294,7 @@ class UserRedux extends Component {
                                         {positions && positions.length > 0 &&
                                             positions.map((item, index) => {
                                                 return (
-                                                    <option key={index} value={item.key}>
+                                                    <option key={index} value={item.keyMap}>
                                                         {language === LANGUAGES.VI ? item.ValueVi : item.valueEn}
                                                     </option>
                                                 )
@@ -301,7 +311,7 @@ class UserRedux extends Component {
                                         {roles && roles.length > 0 &&
                                             roles.map((item, index) => {
                                                 return (
-                                                    <option key={index} value={item.key}>
+                                                    <option key={index} value={item.keyMap}>
                                                         {language === LANGUAGES.VI ? item.ValueVi : item.valueEn}
                                                     </option>
                                                 )
@@ -315,7 +325,6 @@ class UserRedux extends Component {
                                         <input
                                             id='previewImg'
                                             type='file' hidden
-                                            value={avatar}
                                             onChange={(event) => this.handleOnchangeImage(event)}
                                         />
                                         <label

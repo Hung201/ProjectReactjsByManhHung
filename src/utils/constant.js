@@ -3,7 +3,8 @@ export const path = {
     HOMEPAGE: '/home',
     LOGIN: '/login',
     LOG_OUT: '/logout',
-    SYSTEM: '/system'
+    SYSTEM: '/system',
+    DETAIL_DOCTOR: '/detail-doctor/:id'
 };
 
 export const LANGUAGES = {
@@ -16,6 +17,12 @@ export const MANAGE_ACTIONS = {
     READ: 'READ',
     EDIT: 'EDIT',
     DELETE: 'DELETE'
+};
+
+export const USER_ROLE = {
+    ADMIN: 'R1',
+    DOCTOR: 'R2',
+    PATIENT: 'R3'
 };
 
 export const dateFormat = {

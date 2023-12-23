@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import './TableManage.scss';
 import * as actions from "../../../store/actions";
 
-
-
-
 class TableManage extends Component {
 
     constructor(props) {
@@ -15,7 +12,7 @@ class TableManage extends Component {
             users: []
         }
     }
-    async componentDidMount() {
+    componentDidMount() {
         this.props.fetchAllUsersRedux();
 
     }
@@ -37,53 +34,53 @@ class TableManage extends Component {
     }
     render() {
         let users = this.state.users
-        console.log('check all user: ', users)
         return (
-            <div className='users-content'>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">FirstName</th>
-                            <th scope="col">LastName</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users && users.length > 0 &&
-                            users.map((item, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <th scope="row">{index + 1}</th>
-                                        <td>{item.firstName}</td>
-                                        <td>{item.lastName}</td>
-                                        <td>{item.address}</td>
-                                        <td>
-                                            <button
-                                                className='btn-edit'
-                                                onClick={() => this.handleChangeUser(item)}
-                                            >
-                                                <i className="fas fa-pencil-alt"></i>
-                                            </button>
-                                            <button
-                                                className='btn-delete'
-                                                onClick={() => this.handleDeleteUser(item)}
-                                            >
-                                                <i className="fas fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
+            <>
+                <div className='users-content'>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">FirstName</th>
+                                <th scope="col">LastName</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users && users.length > 0 &&
+                                users.map((item, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <th scope="row">{index + 1}</th>
+                                            <td>{item.firstName}</td>
+                                            <td>{item.lastName}</td>
+                                            <td>{item.address}</td>
+                                            <td>
+                                                <button
+                                                    className='btn-edit'
+                                                    onClick={() => this.handleChangeUser(item)}
+                                                >
+                                                    <i className="fas fa-pencil-alt"></i>
+                                                </button>
+                                                <button
+                                                    className='btn-delete'
+                                                    onClick={() => this.handleDeleteUser(item)}
+                                                >
+                                                    <i className="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                            }
 
 
 
-                    </tbody>
-                </table>
-            </div>
-
+                        </tbody>
+                    </table>
+                </div>
+            </>
         );
     };
 }

@@ -62,14 +62,22 @@
          .section-body {
 
              .section-customize {
+                 cursor: pointer;
 
                  &.section-flex {
                      display: flex !important;
                  }
 
+                 .title-name-image {
+                     display        : flex;
+                     justify-content: center;
+                 }
+
                  .title-image {
-                     font-family: 'Montserrat', 'sans-serif';
-                     font-size  : 12px;
+                     font-family    : 'Montserrat', 'sans-serif';
+                     font-size      : 12px;
+                     display        : flex;
+                     justify-content: center;
                  }
 
                  .bg-image {
@@ -90,11 +98,11 @@
                      }
 
                      &.section-outstanding-doctor {
-                         background-image: url('../../assets/outstanding-doctor/103848anh-dai-dien-bs.jpg');
-                         width           : 120px;
-                         height          : 120px;
-                         margin          : 0 auto;
-                         border-radius   : 50%;
+                         //  background-image: url('../../assets/outstanding-doctor/103848anh-dai-dien-bs.jpg');
+                         width        : 120px;
+                         height       : 120px;
+                         margin       : 0 auto;
+                         border-radius: 50%;
 
                      }
 

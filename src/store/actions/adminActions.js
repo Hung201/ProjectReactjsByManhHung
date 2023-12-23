@@ -1,5 +1,8 @@
 import actionTypes from './actionTypes';
-import { getAllcodeService, createNewUserService, getAllUsers, deleteUserService, editUserService } from '../../services/userService';
+import {
+    getAllcodeService, createNewUserService, getAllUsers, deleteUserService,
+    editUserService, getTopDoctorHomeService, getAllDoctorService, saveDetailDoctorService, getAllCodeService
+} from '../../services/userService';
 import { toast } from "react-toastify";
 
 
@@ -115,7 +118,6 @@ export const fetchAllUserStart = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllUsers('ALL');
-            console.log('check res: ', res)
             if (res && res.errCode === 0) {
                 // toast.success("Create a new user  succeed!")
                 dispatch(fetchAllUserSuccess(res.users.reverse()))
@@ -143,14 +145,16 @@ export const deleteUser = (id) => {
         try {
             let res = await deleteUserService(id);
             if (res && res.errCode === 0) {
-                toast.success("Delete a new user  succeed!")
+                toast.success("Delete a user  succeed!")
                 dispatch(deleteUserSuccess())
                 dispatch(fetchAllUserStart())
             } else {
+                toast.error("Delete a user failed!")
                 dispatch(deleteUserFailed())
             }
         } catch (e) {
             dispatch(deleteUserFailed());
+            toast.error("Delete a user failed!")
             console.log('deleteUserFailed error', e)
         }
     }
@@ -168,16 +172,17 @@ export const editUser = (data) => {
     return async (dispatch, getState) => {
         try {
             let res = await editUserService(data);
-            console.log('check res: ', res)
             if (res && res.errCode === 0) {
                 toast.success("Change a new user succeed!")
                 dispatch(editUserSuccess())
                 dispatch(fetchAllUserStart())
             } else {
                 dispatch(editUserFailed())
+                toast.error("Change a new user failed!")
             }
         } catch (e) {
             dispatch(editUserFailed());
+            toast.error("Change a new user failed!")
             console.log('editUserFailed error', e)
         }
     }
@@ -189,4 +194,111 @@ export const editUserSuccess = () => ({
 
 export const editUserFailed = () => ({
     type: actionTypes.EDIT_USER_FAILED
+})
+
+export const fetchTopDoctor = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getTopDoctorHomeService('');
+            if (res && res.errCode === 0) {
+                dispatch(fetchTopDoctorSuccess(res.data))
+            } else {
+                dispatch(fetchTopDoctorFailed())
+            }
+        } catch (e) {
+            dispatch(fetchTopDoctorFailed());
+            console.log('fetchTopDoctorFailed error', e)
+        }
+    }
+}
+
+export const fetchTopDoctorSuccess = (data) => ({
+    type: actionTypes.FETCH_TOP_DOCTOR_SUCCESS,
+    dataDoctor: data
+})
+
+export const fetchTopDoctorFailed = () => ({
+    type: actionTypes.FETCH_TOP_DOCTOR_FAILED
+})
+
+
+export const fetchAllDoctor = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllDoctorService();
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllDoctorSuccess(res.data))
+            } else {
+                dispatch(fetchAllDoctorFailed())
+            }
+        } catch (e) {
+            dispatch(fetchAllDoctorFailed());
+            console.log('fetchAllDoctorFailed error', e)
+        }
+    }
+}
+
+export const fetchAllDoctorSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_DOCTOR_SUCCESS,
+    allDoctor: data
+})
+
+export const fetchAllDoctorFailed = () => ({
+    type: actionTypes.FETCH_ALL_DOCTOR_FAILED
+})
+
+
+export const saveDetailDoctor = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await saveDetailDoctorService(data)
+            if (res && res.errCode === 0) {
+                toast.success("Save infor detail doctor succeed!")
+
+                dispatch(saveDetailDoctorSuccess())
+            } else {
+                toast.error("Save infor detail doctor error!")
+                dispatch(saveDetailDoctorFailed())
+            }
+        } catch (e) {
+            toast.error("Save infor detail doctor error!")
+            console.log('SAVE_DETAIL_DOCTOR_FAILED: ', e)
+            dispatch(saveDetailDoctorFailed())
+        }
+    }
+}
+
+export const saveDetailDoctorSuccess = () => ({
+    type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
+})
+
+export const saveDetailDoctorFailed = () => ({
+    type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED
+})
+
+export const fetchAllScheduleTime = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('TIME')
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllScheduleTimeSuccess(res.data))
+            } else {
+                dispatch(fetchAllScheduleTimeFailed())
+            }
+        } catch (e) {
+            console.log('FETCH_ALL_ALLCODE_SCHEDULE_TIME_FAILED: ', e)
+            dispatch({
+                type: actionTypes.FETCH_ALL_ALLCODE_SCHEDULE_TIME_FAILED,
+            })
+        }
+    }
+}
+
+export const fetchAllScheduleTimeSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_ALLCODE_SCHEDULE_TIME_SUCCESS,
+    dataTime: data
+})
+
+export const fetchAllScheduleTimeFailed = () => ({
+    type: actionTypes.FETCH_ALL_ALLCODE_SCHEDULE_TIME_FAILED
 })

@@ -23,17 +23,6 @@
         "text-child-6": "Health Test"
     },
     "menu": {
-        "system": {
-            "header": "System",
-            "system-administrator": {
-                "header": "System Administrator",
-                "user-manage": "User manage",
-                "user-redux": "Manage user redux"
-            },
-            "system-parameter": {
-                "header": "System-parameter"
-            }
-        },
         "admin": {
             "manage-user": "Manage user",
             "manage-doctor": "Manage doctor",
@@ -44,7 +33,11 @@
             "manage-specialist": "Manage specialist",
             "handbook": "Handbook",
             "manage-handbook": "Manage handbook",
-            "crud-redux": "CRUD Redux"
+            "crud-redux": "CRUD Redux",
+            "manage-schedule": "Manage Doctor's schedule"
+        },
+        "doctor": {
+            "manage-schedule": "Manage Doctor's schedule"
         }
     },
     "manage-user": {
@@ -60,5 +53,30 @@
         "image": "Image",
         "save": "Save",
         "edit": "Save changes"
+    },
+    "homepage": {
+        "out-standing-doctor": "Last week's featured doctor",
+        "search": "Search"
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Create more information doctors",
+            "select-doctor": "Select doctor",
+            "intro": "Introduction:",
+            "add": "Create infor",
+            "save": "Save infor",
+            "price": "Price",
+            "payment": "Payment",
+            "province": "Province",
+            "nameClinic": "Clinic's name",
+            "addressClinic": "Clinic's address",
+            "note": "Note"
+        }
+    },
+    "manage-schedule": {
+        "title": "Manage doctor's examination plan",
+        "choose-doctor": "Choose doctor",
+        "choose-date": "Choose date",
+        "save": "Save infor"
     }
 }

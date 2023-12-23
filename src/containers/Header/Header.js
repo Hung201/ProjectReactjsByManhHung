@@ -3,18 +3,47 @@ import { connect } from 'react-redux';
 
 import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
-import { adminMenu } from './menuApp';
+import { adminMenu, doctorMenu } from './menuApp';
 import './Header.scss';
-import { LANGUAGES } from '../../utils/constant';
+import { LANGUAGES, USER_ROLE } from '../../utils/constant';
 import { changeLanguageApp } from '../../store/actions/appActions';
 import { FormattedMessage } from 'react-intl';
+import _ from 'lodash';
+
 
 
 
 
 class Header extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuApp: []
+        }
+    }
     changeLanguageApp = (language) => {
         this.props.changeLanguageAppRedux(language)
+    }
+
+    componentDidMount() {
+        let { userInfo } = this.props;
+        let menu = [];
+
+        if (userInfo && !_.isEmpty(userInfo)) {
+            let role = userInfo.roleId;
+            if (role === USER_ROLE.ADMIN) {
+                menu = adminMenu;
+            }
+
+            if (role === USER_ROLE.DOCTOR) {
+                menu = doctorMenu;
+            }
+        }
+
+        this.setState({
+            menuApp: menu
+        })
     }
     render() {
         let language = this.props.language
@@ -25,7 +54,7 @@ class Header extends Component {
             <div className="header-container">
                 {/* thanh navigator */}
                 <div className="header-tabs-container">
-                    <Navigator menus={adminMenu} />
+                    <Navigator menus={this.state.menuApp} />
                 </div>
                 <div className='header-right'>
                     <span className='hello'><FormattedMessage id="headerhome.hello" /> {userInfo && userInfo.firstName ? userInfo.firstName : ''}</span>

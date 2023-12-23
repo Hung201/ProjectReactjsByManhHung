@@ -2,17 +2,25 @@ export const adminMenu = [
     { //Quản lý người dùng
         name: 'menu.admin.manage-user', menus: [
             {
-                name: 'menu.admin.manage-doctor', link: '/system/user-manage'
+                name: 'menu.admin.manage-user', link: '/system/user-manage'
                 // subMenus: [
                 //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
                 //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
                 // ]
             },
-            {
-                name: 'menu.admin.manage-admin', link: '/system/user-admin'
-            },
+            // {
+            //     name: 'menu.admin.manage-admin', link: '/system/user-admin'
+            // },
             {
                 name: 'menu.admin.crud-redux', link: '/system/crud-redux'
+            },
+
+            {
+                name: 'menu.admin.manage-doctor', link: '/system/manage-doctor'
+            },
+            {
+                //Quản lý kế hoạch khám bệnh bác sỹ
+                name: 'menu.admin.manage-schedule', link: '/doctor/manage-schedule'
             }
         ]
     },
@@ -38,3 +46,14 @@ export const adminMenu = [
         ]
     }
 ];
+
+export const doctorMenu = [
+    {
+        name: 'menu.admin.manage-user',
+        menus: [
+            { //Quản lý kế hoạch khám bệnh bác sỹ
+                name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule'
+            },
+        ]
+    }
+]
