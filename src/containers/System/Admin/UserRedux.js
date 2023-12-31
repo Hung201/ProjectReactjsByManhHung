@@ -5,8 +5,8 @@ import './UserRedux.scss';
 // import { getAllcodeService } from '../../../services/userService';
 import { LANGUAGES, MANAGE_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from "../../../store/actions";
-import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
+// import Lightbox from 'react-image-lightbox';
+// import 'react-image-lightbox/style.css';
 import { add } from 'lodash';
 import TableManage from './TableManage';
 
@@ -350,12 +350,12 @@ class UserRedux extends Component {
                             </form>
                         </div>
                     </div>
-                    {this.state.isOpen &&
+                    {/* {this.state.isOpen &&
                         <Lightbox
                             mainSrc={this.state.previewImage}
                             onCloseRequest={() => this.setState({ isOpen: false })}
                         />
-                    }
+                    } */}
 
                 </div>
                 <div className='col-12 mb-5'>

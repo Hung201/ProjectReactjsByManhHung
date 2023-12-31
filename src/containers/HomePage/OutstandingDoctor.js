@@ -12,6 +12,7 @@ class OutstandingDoctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            arrDoctors: []
 
         }
     }
@@ -21,7 +22,12 @@ class OutstandingDoctor extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
 
+        if (prevProps.userTopDoctors !== this.props.userTopDoctors) {
+            this.setState({
+                arrDoctors: this.props.userTopDoctors
+            })
 
+        }
     }
 
 
@@ -32,7 +38,7 @@ class OutstandingDoctor extends Component {
 
     }
     render() {
-        let arrDoctor = this.props.userTopDoctors
+        let arrDoctor = this.state.arrDoctors;
         let language = this.props.language;
 
         return (
@@ -53,7 +59,9 @@ class OutstandingDoctor extends Component {
                                     let nameVi = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName}`;
                                     let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
                                     return (
-                                        <div className='section-customize' onClick={() => this.handleViewDetailDoctor(item)}>
+                                        <div className='section-customize'
+                                            key={index}
+                                            onClick={() => this.handleViewDetailDoctor(item)}>
                                             <div className='customize-border'>
                                                 <div className='outer-bg'>
                                                     <div className='bg-image section-outstanding-doctor '

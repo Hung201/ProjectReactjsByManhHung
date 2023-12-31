@@ -49,12 +49,12 @@ class ManageSchedule extends Component {
         }
 
 
-        // if (prevProps.language !== this.props.language) {
-        //     let dataSelect = this.buildDataInputSelect(this.props.allDoctors)
-        //     this.setState({
-        //         listDoctors: dataSelect
-        //     })
-        // }
+        if (prevProps.language !== this.props.language) {
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctor)
+            this.setState({
+                listDoctors: dataSelect
+            })
+        }
     }
 
     buildDataInputSelect = (inputData) => {
@@ -116,7 +116,7 @@ class ManageSchedule extends Component {
                         <div className='col-6 form-group'>
                             <label><FormattedMessage id='manage-schedule.choose-doctor' /></label>
                             <Select
-                                value={this.state.selectedDoctor}
+                                value={selectedDoctor}
                                 onChange={this.handleChangeSelect}
                                 options={this.state.listDoctors}
                             />
