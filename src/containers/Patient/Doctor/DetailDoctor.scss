@@ -37,6 +37,20 @@
     .infor-doctor {
         background: #f9f9f9;
         padding   : 10px 130px;
+    }
 
+
+    .schedule-doctor {
+        padding      : 10px 130px;
+        border-bottom: 1px solid #ddd;
+
+        .sd-content-right {
+            width       : 50%;
+            border-right: 1px solid red;
+        }
+
+        .sd-content-left {
+            width: 50%;
+        }
     }
 }
