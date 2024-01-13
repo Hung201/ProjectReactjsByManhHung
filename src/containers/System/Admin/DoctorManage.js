@@ -31,32 +31,55 @@ class TableManage extends Component {
 
 
             //save to doctor infor table
-            // listPrice: [],
-            // listPayment: [],
-            // listProvince: [],
-            // selectedPrice: '',
-            // selectedPayment: '',
-            // selectedProvince: '',
-            // nameClinic: '',
-            // addressClinic: '',
-            // note: ''
+            listPrice: [],
+            listPayment: [],
+            listProvince: [],
+            selectedPrice: '',
+            selectedPayment: '',
+            selectedProvince: '',
+            nameClinic: '',
+            addressClinic: '',
+            note: ''
         }
     }
     componentDidMount() {
         this.props.fetchAllDoctor()
+        this.props.getAllRequiredDoctorInfor();
+
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.allDoctor !== this.props.allDoctor) {
-            let dataSelect = this.buildDataInputSelect(this.props.allDoctor)
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctor, 'USERS')
             this.setState({
                 listDoctors: dataSelect
             })
         }
 
-        if (prevProps.language !== this.props.language) {
-            let dataSelect = this.buildDataInputSelect(this.props.allDoctor)
+        if (prevProps.allRequiredDoctorInfor !== this.props.allRequiredDoctorInfor) {
+            let { resPrice, resPayment, resProvince } = this.props.allRequiredDoctorInfor
+            let dataSelectPrice = this.buildDataInputSelect(resPrice, "PRICE")
+            let dataSelectPayment = this.buildDataInputSelect(resPayment, "PAYMENT")
+            let dataSelectProvince = this.buildDataInputSelect(resProvince, "PROVINCE")
+            console.log('check manhhung  data: ', dataSelectPrice, dataSelectPayment, dataSelectProvince)
+
             this.setState({
-                listDoctors: dataSelect
+                listPrice: dataSelectPrice,
+                listPayment: dataSelectPayment,
+                listProvince: dataSelectProvince,
+            })
+        }
+        if (prevProps.language !== this.props.language) {
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctor, 'USERS')
+            let { resPrice, resPayment, resProvince } = this.props.allRequiredDoctorInfor
+            let dataSelectPrice = this.buildDataInputSelect(resPrice, "PRICE")
+            let dataSelectPayment = this.buildDataInputSelect(resPayment, "PAYMENT")
+            let dataSelectProvince = this.buildDataInputSelect(resProvince, "PROVINCE")
+
+            this.setState({
+                listDoctors: dataSelect,
+                listPrice: dataSelectPrice,
+                listPayment: dataSelectPayment,
+                listProvince: dataSelectProvince,
             })
         }
 
@@ -67,14 +90,36 @@ class TableManage extends Component {
         let result = [];
         let { language } = this.props
         if (inputData && inputData.length > 0) {
-            inputData.map((item, index) => {
-                let object = {}
-                let labelVi = `${item.lastName} ${item.firstName}`;
-                let labelEn = `${item.firstName} ${item.lastName}`;
-                object.label = language === LANGUAGES.VI ? labelVi : labelEn;
-                object.value = item.id;
-                result.push(object)
-            })
+            if (type === 'USERS') {
+                inputData.map((item, index) => {
+                    let object = {}
+                    let labelVi = `${item.lastName} ${item.firstName}`;
+                    let labelEn = `${item.firstName} ${item.lastName}`;
+                    object.label = language === LANGUAGES.VI ? labelVi : labelEn;
+                    object.value = item.id;
+                    result.push(object)
+                })
+            }
+            if (type === 'PRICE') {
+                inputData.map((item, index) => {
+                    let object = {}
+                    let labelVi = `${item.ValueVi}`;
+                    let labelEn = `${item.valueEn} USD`;
+                    object.label = language === LANGUAGES.VI ? labelVi : labelEn;
+                    object.value = item.keyMap;
+                    result.push(object)
+                })
+            }
+            if (type === 'PAYMENT' || type === 'PROVINCE') {
+                inputData.map((item, index) => {
+                    let object = {}
+                    let labelVi = `${item.ValueVi}`;
+                    let labelEn = `${item.valueEn}`;
+                    object.label = language === LANGUAGES.VI ? labelVi : labelEn;
+                    object.value = item.keyMap;
+                    result.push(object)
+                })
+            }
         }
         return result
     }
@@ -134,6 +179,8 @@ class TableManage extends Component {
 
     render() {
         let { hasOldData } = this.state;
+        let { allRequiredDoctorInfor } = this.props;
+        console.log('check: ', this.props.allRequiredDoctorInfor)
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
@@ -158,12 +205,12 @@ class TableManage extends Component {
                         </textarea>
                     </div>
                 </div>
-                {/* 
+
                 <div className='more-infor-extra row'>
                     <div className='col-4 form-group'>
                         <label><FormattedMessage id="admin.manage-doctor.price" /></label>
                         <Select
-                            value={this.state.selectedPrice}
+                            // value={this.state.selectedPrice}
                             onChange={this.handleChangeSelectDoctorInfor}
                             options={this.state.listPrice}
                             placeholder={<FormattedMessage id="admin.manage-doctor.price" />}
@@ -173,7 +220,7 @@ class TableManage extends Component {
                     <div className='col-4 form-group'>
                         <label><FormattedMessage id="admin.manage-doctor.payment" /></label>
                         <Select
-                            value={this.state.selectedPayment}
+                            // value={this.state.selectedPayment}
                             onChange={this.handleChangeSelectDoctorInfor}
                             options={this.state.listPayment}
                             placeholder={<FormattedMessage id="admin.manage-doctor.payment" />}
@@ -183,7 +230,7 @@ class TableManage extends Component {
                     <div className='col-4 form-group'>
                         <label><FormattedMessage id="admin.manage-doctor.province" /></label>
                         <Select
-                            value={this.state.selectedProvince}
+                            // value={this.state.selectedProvince}
                             onChange={this.handleChangeSelectDoctorInfor}
                             options={this.state.listProvince}
                             placeholder={<FormattedMessage id="admin.manage-doctor.province" />}
@@ -212,7 +259,7 @@ class TableManage extends Component {
                             value={this.state.note}
                         />
                     </div>
-                </div> */}
+                </div>
                 <div className='manage-doctor-editor'>
                     <MdEditor
                         style={{ height: '500px' }}
@@ -243,6 +290,7 @@ const mapStateToProps = state => {
     return {
         allDoctor: state.admin.allDoctor,
         language: state.app.language,
+        allRequiredDoctorInfor: state.admin.allRequiredDoctorInfor,
 
     };
 };
@@ -250,7 +298,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchAllDoctor: () => dispatch(actions.fetchAllDoctor()),
-        saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctor(data))
+        saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctor(data)),
+        getAllRequiredDoctorInfor: () => dispatch(actions.getRequiredDoctorInfor()),
 
     };
 };
