@@ -9,7 +9,8 @@ import 'react-markdown-editor-lite/lib/index.css';
 import './DoctorManage.scss';
 import Select from 'react-select';
 import { MANAGE_ACTIONS, LANGUAGES } from '../../../utils';
-import { getDetailInforDoctorService } from '../../../services/userService'
+import { getDetailInforDoctorService } from '../../../services/userService';
+
 
 
 
@@ -140,6 +141,12 @@ class TableManage extends Component {
             doctorId: this.state.selectedOption.value,
             action: hasOldData === true ? MANAGE_ACTIONS.EDIT : MANAGE_ACTIONS.CREATE,
 
+            selectedPrice: this.state.selectedPrice.value,
+            selectedPayment: this.state.selectedPayment.value,
+            selectedProvince: this.state.selectedProvince.value,
+            nameClinic: this.state.nameClinic,
+            addressClinic: this.state.addressClinic,
+            note: this.state.note,
         })
     }
 
@@ -170,17 +177,27 @@ class TableManage extends Component {
         }
     };
 
-
-    handleOnChangeDesc = (event) => {
+    handleChangeSelectDoctorInfor = async (selectedOption, name) => {
+        let statename = name.name;
+        let stateCopy = { ...this.state };
+        stateCopy[statename] = selectedOption;
         this.setState({
-            description: event.target.value
+            ...stateCopy
+        })
+    }
+
+
+    handleOnChangeText = (event, id) => {
+        let stateCopy = { ...this.state }
+        stateCopy[id] = event.target.value
+        this.setState({
+            ...stateCopy
         })
     }
 
     render() {
         let { hasOldData } = this.state;
         let { allRequiredDoctorInfor } = this.props;
-        console.log('check: ', this.props.allRequiredDoctorInfor)
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
@@ -199,7 +216,7 @@ class TableManage extends Component {
                     <div className='content-right'>
                         <label><FormattedMessage id="admin.manage-doctor.intro" /></label>
                         <textarea className='form-control'
-                            onChange={(event) => this.handleOnChangeDesc(event)}
+                            onChange={(event) => this.handleOnChangeText(event)}
                             value={this.state.description}
                         >
                         </textarea>
@@ -210,7 +227,7 @@ class TableManage extends Component {
                     <div className='col-4 form-group'>
                         <label><FormattedMessage id="admin.manage-doctor.price" /></label>
                         <Select
-                            // value={this.state.selectedPrice}
+                            value={this.state.selectedPrice}
                             onChange={this.handleChangeSelectDoctorInfor}
                             options={this.state.listPrice}
                             placeholder={<FormattedMessage id="admin.manage-doctor.price" />}
@@ -220,7 +237,7 @@ class TableManage extends Component {
                     <div className='col-4 form-group'>
                         <label><FormattedMessage id="admin.manage-doctor.payment" /></label>
                         <Select
-                            // value={this.state.selectedPayment}
+                            value={this.state.selectedPayment}
                             onChange={this.handleChangeSelectDoctorInfor}
                             options={this.state.listPayment}
                             placeholder={<FormattedMessage id="admin.manage-doctor.payment" />}
@@ -230,7 +247,7 @@ class TableManage extends Component {
                     <div className='col-4 form-group'>
                         <label><FormattedMessage id="admin.manage-doctor.province" /></label>
                         <Select
-                            // value={this.state.selectedProvince}
+                            value={this.state.selectedProvince}
                             onChange={this.handleChangeSelectDoctorInfor}
                             options={this.state.listProvince}
                             placeholder={<FormattedMessage id="admin.manage-doctor.province" />}
