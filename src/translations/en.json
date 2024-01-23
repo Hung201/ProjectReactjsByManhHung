@@ -34,7 +34,8 @@
             "handbook": "Handbook",
             "manage-handbook": "Manage handbook",
             "crud-redux": "CRUD Redux",
-            "manage-schedule": "Manage Doctor's schedule"
+            "manage-schedule": "Manage Doctor's schedule",
+            "manage-system": "Manage system"
         },
         "doctor": {
             "manage-schedule": "Manage Doctor's schedule"

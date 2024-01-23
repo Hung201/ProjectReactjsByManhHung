@@ -85,6 +85,7 @@ class TableManage extends Component {
         }
 
 
+
     }
 
     buildDataInputSelect = (inputData, type) => {
@@ -148,6 +149,22 @@ class TableManage extends Component {
             addressClinic: this.state.addressClinic,
             note: this.state.note,
         })
+        if (this.props.saveDetailDoctorSuccess()) {
+            this.setState({
+                contentHTML: '',
+                contentMarkdown: '',
+                selectedOption: '',
+                description: '',
+                hasOldData: false,
+                addressClinic: '',
+                nameClinic: '',
+                note: '',
+                selectedPayment: '',
+                selectedPrice: '',
+                selectedProvince: ''
+            })
+        }
+
     }
 
     handleChangeSelect = async (selectedOption) => {
@@ -183,9 +200,6 @@ class TableManage extends Component {
                 selectedProvince = listProvince.find(item => {
                     return item && item.value === provinceId
                 })
-                console.log('check list: ', selectedPayment, selectedPrice, selectedProvince)
-
-
             }
             this.setState({
                 contentHTML: markdown.contentHTML,
@@ -235,7 +249,6 @@ class TableManage extends Component {
 
     render() {
         let { hasOldData } = this.state;
-        let { allRequiredDoctorInfor } = this.props;
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
@@ -254,7 +267,7 @@ class TableManage extends Component {
                     <div className='content-right'>
                         <label><FormattedMessage id="admin.manage-doctor.intro" /></label>
                         <textarea className='form-control'
-                            onChange={(event) => this.handleOnChangeText(event)}
+                            onChange={(event) => this.handleOnChangeText(event, 'description')}
                             value={this.state.description}
                         >
                         </textarea>
@@ -355,7 +368,7 @@ const mapDispatchToProps = dispatch => {
         fetchAllDoctor: () => dispatch(actions.fetchAllDoctor()),
         saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctor(data)),
         getAllRequiredDoctorInfor: () => dispatch(actions.getRequiredDoctorInfor()),
-
+        saveDetailDoctorSuccess: () => dispatch(actions.saveDetailDoctorSuccess())
     };
 };
 

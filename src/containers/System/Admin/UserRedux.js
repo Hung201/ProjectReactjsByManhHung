@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserRedux.scss';
-// import { getAllcodeService } from '../../../services/userService';
 import { LANGUAGES, MANAGE_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from "../../../store/actions";
 // import Lightbox from 'react-image-lightbox';
@@ -272,7 +271,7 @@ class UserRedux extends Component {
                                 <div className="col-3">
                                     <label className="form-label"><FormattedMessage id="manage-user.gender" /></label>
                                     <select
-                                        className="form-select"
+                                        className="form-control"
                                         value={gender}
                                         onChange={(event) => { this.onChangeInput(event, 'gender') }}>
                                         {genders && genders.length > 0 &&
@@ -288,7 +287,7 @@ class UserRedux extends Component {
                                 <div className="col-3">
                                     <label className="form-label"><FormattedMessage id="manage-user.position" /></label>
                                     <select
-                                        className="form-select"
+                                        className="form-control"
                                         value={position}
                                         onChange={(event) => { this.onChangeInput(event, 'position') }}>
                                         {positions && positions.length > 0 &&
@@ -305,7 +304,7 @@ class UserRedux extends Component {
                                 <div className="col-3">
                                     <label className="form-label"><FormattedMessage id="manage-user.role" /></label>
                                     <select
-                                        className="form-select"
+                                        className="form-control"
                                         value={role}
                                         onChange={(event) => { this.onChangeInput(event, 'role') }}>
                                         {roles && roles.length > 0 &&
