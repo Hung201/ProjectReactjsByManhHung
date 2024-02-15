@@ -41,16 +41,38 @@ $box-shadow-color: #0000004d;
 $dropdown-image: url("../assets/images/dropdown.svg");
 
 //date picker
-$date-picker-bg           : $common-white;
-$date-picker-border       : darken(#3f4458, 50%);
-$date-picker-arrow-hover  : $common-orange;
-$date-picker-month-fg     : #000;
-$date-picker-month-bg     : $common-white;
-$date-picker-weekdays-fg  : #000;
-$date-picker-weekdays-bg  : transparent;
-$date-picker-day-fg       : #000;
-$date-picker-day-hover-bg : darken($common-white, 25%);
-$date-picker-today-border : $common-orange;
-$date-picker-today-bg     : $common-orange;
-$date-picker-today-fg     : #000;
+$date-picker-bg             : $common-white;
+$date-picker-border         : darken(#3f4458, 50%);
+$date-picker-arrow-hover    : $common-orange;
+$date-picker-month-fg       : #000;
+$date-picker-month-bg       : $common-white;
+$date-picker-weekdays-fg    : #000;
+$date-picker-weekdays-bg    : transparent;
+$date-picker-day-fg         : #000;
+$date-picker-day-hover-bg   : darken($common-white, 25%);
+$date-picker-today-border   : $common-orange;
+$date-picker-today-bg       : $common-orange;
+$date-picker-today-fg       : #000;
 $date-picker-day-selected-fg: $common-white;
+
+//color light and dark
+
+$color-primary     : #6C9BCF;
+$color-danger      : #FF0060;
+$color-success     : #1B9C85;
+$color-warning     : #F7D060;
+$color-white       : #fff;
+$color-info-dark   : #7d8da1;
+$color-dark        : #363949;
+$color-light       : rgba(132, 139, 200, 0.18);
+$color-dark-variant: #677483;
+$color-background  : #f6f6f9;
+
+$card-border-radius: 2rem;
+$border-radius-1   : 0.4rem;
+$border-radius-2   : 1.2rem;
+
+$card-padding: 1.8rem;
+$padding-1   : 1.2rem;
+
+$box-shadow: 0 2rem 3rem $color-light;
