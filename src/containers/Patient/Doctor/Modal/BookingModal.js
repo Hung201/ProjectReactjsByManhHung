@@ -133,26 +133,34 @@ class BookingModal extends Component {
             timeType: this.state.timeType,
             language: this.props.language,
             timeString: timeString,
-            doctorName: doctorName
+            doctorName: doctorName,
+            birthday: this.state.birthday
         })
 
         if (res && res.errCode === 0) {
-            toast.success('Booking a new appointment succeed!')
-            this.setState({
-                fullName: '',
-                phoneNumber: '',
-                email: '',
-                address: '',
-                reason: '',
-                date: '',
-                selectedGender: '',
-                doctorId: this.state.doctorId,
-                timeType: this.state.timeType,
-            })
+            toast.success('You have successfully booked your appointment!')
+            // this.setState({
+            //     fullName: '',
+            //     phoneNumber: '',
+            //     email: '',
+            //     address: '',
+            //     reason: '',
+            //     date: '',
+            //     selectedGender: '',
+            //     doctorId: this.state.doctorId,
+            //     timeType: this.state.timeType,
+            // })
             this.props.closeBookingClose();
+        } else if (res && res.errCode === 2) {
+            toast.error('You already have an appointment, please wait for confirmation!')
+
+        } else if (res && res.errCode === 3) {
+            toast.error('User does not exist!')
+
         } else {
             toast.error('Booking a new appointment error!')
         }
+
 
     }
     render() {
