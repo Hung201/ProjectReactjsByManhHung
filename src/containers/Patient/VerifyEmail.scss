@@ -1,0 +1,43 @@
+.successed-email {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    flex-direction : column;
+    height         : 90vh;
+
+    .successed-image {
+        background         : url('../../assets/images/successEmail.jpg');
+        height             : 300px;
+        width              : 500px;
+        background-color   : #fff;
+        background-repeat  : no-repeat;
+        background-position: center;
+        background-size    : cover;
+    }
+
+    .successed-text {
+        font-size: 18px;
+    }
+}
+
+.failed-email {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    flex-direction : column;
+    height         : 90vh;
+
+    .failed-image {
+        background         : url('../../assets/images/failedEmail.jpg');
+        height             : 300px;
+        width              : 500px;
+        background-color   : #fff;
+        background-repeat  : no-repeat;
+        background-position: center;
+        background-size    : cover;
+    }
+
+    .failed-text {
+        font-size: 18px;
+    }
+}

@@ -32,7 +32,6 @@ class BookingModal extends Component {
     }
     async componentDidMount() {
         this.props.getGenders();
-
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -138,18 +137,18 @@ class BookingModal extends Component {
         })
 
         if (res && res.errCode === 0) {
-            toast.success('You have successfully booked your appointment!')
-            // this.setState({
-            //     fullName: '',
-            //     phoneNumber: '',
-            //     email: '',
-            //     address: '',
-            //     reason: '',
-            //     date: '',
-            //     selectedGender: '',
-            //     doctorId: this.state.doctorId,
-            //     timeType: this.state.timeType,
-            // })
+            toast.success('The booking has been successfully created!')
+            this.setState({
+                fullName: '',
+                phoneNumber: '',
+                email: '',
+                address: '',
+                reason: '',
+                date: '',
+                selectedGender: '',
+                doctorId: this.state.doctorId,
+                timeType: this.state.timeType,
+            })
             this.props.closeBookingClose();
         } else if (res && res.errCode === 2) {
             toast.error('You already have an appointment, please wait for confirmation!')
