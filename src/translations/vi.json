@@ -57,7 +57,9 @@
     },
     "homepage": {
         "out-standing-doctor": "Bác sĩ nổi bật tuần qua",
-        "search": "Tìm kiếm"
+        "search": "Tìm kiếm",
+        "more-infor": "Xem thêm",
+        "specialty-popular": "Chuyên khoa phổ biến"
     },
     "admin": {
         "manage-doctor": {

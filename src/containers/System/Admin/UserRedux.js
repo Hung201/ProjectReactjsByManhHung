@@ -6,7 +6,6 @@ import { LANGUAGES, MANAGE_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from "../../../store/actions";
 // import Lightbox from 'react-image-lightbox';
 // import 'react-image-lightbox/style.css';
-import { add } from 'lodash';
 import TableManage from './TableManage';
 
 

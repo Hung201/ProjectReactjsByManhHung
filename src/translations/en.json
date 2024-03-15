@@ -57,7 +57,9 @@
     },
     "homepage": {
         "out-standing-doctor": "Last week's featured doctor",
-        "search": "Search"
+        "search": "Search",
+        "more-infor": "More infor",
+        "specialty-popular": "Popular specialties"
     },
     "admin": {
         "manage-doctor": {

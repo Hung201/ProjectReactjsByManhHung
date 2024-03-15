@@ -78,7 +78,16 @@
                      font-size      : 12px;
                      display        : flex;
                      justify-content: center;
+
+                     &.title-specialist {
+                         padding-right: 50px;
+
+                         &:hover {
+                             color: #45c3d2;
+                         }
+                     }
                  }
+
 
                  .bg-image {
                      width              : 250px;
@@ -89,8 +98,8 @@
                      background-color   : #eee;
                      margin-bottom      : 10px;
 
-                     &.section-specialty {
-                         background-image: url('../../assets/specialist/113221-benh-viem-gan.jpg');
+                     &.section-specialist {
+                         //  background-image: url('../../assets/specialist/113221-benh-viem-gan.jpg');
                      }
 
                      &.section-medical-facility {
