@@ -35,12 +35,22 @@ class TableManage extends Component {
             listPrice: [],
             listPayment: [],
             listProvince: [],
+            listClinic: [],
+            listSpecialty: [],
+
+
             selectedPrice: '',
             selectedPayment: '',
             selectedProvince: '',
+            selectedClinic: '',
+            selectedSpecialty: '',
+
+
             nameClinic: '',
             addressClinic: '',
-            note: ''
+            note: '',
+            clinicId: '',
+            specialtyId: ''
         }
     }
     componentDidMount() {
@@ -57,16 +67,17 @@ class TableManage extends Component {
         }
 
         if (prevProps.allRequiredDoctorInfor !== this.props.allRequiredDoctorInfor) {
-            let { resPrice, resPayment, resProvince } = this.props.allRequiredDoctorInfor
+            let { resPrice, resPayment, resProvince, resSpecialty } = this.props.allRequiredDoctorInfor
             let dataSelectPrice = this.buildDataInputSelect(resPrice, "PRICE")
             let dataSelectPayment = this.buildDataInputSelect(resPayment, "PAYMENT")
             let dataSelectProvince = this.buildDataInputSelect(resProvince, "PROVINCE")
-            console.log('check manhhung  data: ', dataSelectPrice, dataSelectPayment, dataSelectProvince)
+            let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, "SPECIALTY")
 
             this.setState({
                 listPrice: dataSelectPrice,
                 listPayment: dataSelectPayment,
                 listProvince: dataSelectProvince,
+                listSpecialty: dataSelectSpecialty
             })
         }
         if (prevProps.language !== this.props.language) {
@@ -122,6 +133,14 @@ class TableManage extends Component {
                     result.push(object)
                 })
             }
+            if (type === 'SPECIALTY') {
+                inputData.map((item, index) => {
+                    let object = {}
+                    object.label = item.name;
+                    object.value = item.id;
+                    result.push(object)
+                })
+            }
         }
         return result
     }
@@ -148,6 +167,8 @@ class TableManage extends Component {
             nameClinic: this.state.nameClinic,
             addressClinic: this.state.addressClinic,
             note: this.state.note,
+            clinicId: this.state.selectedClinic && this.state.selectedClinic.value ? this.state.selectedClinic.value : '',
+            specialtyId: this.state.selectedSpecialty.value
         })
         if (this.props.saveDetailDoctorSuccess()) {
             this.setState({
@@ -161,7 +182,9 @@ class TableManage extends Component {
                 note: '',
                 selectedPayment: '',
                 selectedPrice: '',
-                selectedProvince: ''
+                selectedProvince: '',
+                selectedClinic: '',
+                selectedSpecialty: ''
             })
         }
 
@@ -224,7 +247,8 @@ class TableManage extends Component {
                 note: '',
                 selectedPayment: '',
                 selectedPrice: '',
-                selectedProvince: ''
+                selectedProvince: '',
+
             })
         }
     };
@@ -248,7 +272,7 @@ class TableManage extends Component {
     }
 
     render() {
-        let { hasOldData } = this.state;
+        let { hasOldData, listSpecialty, listClinic } = this.state;
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
@@ -261,7 +285,7 @@ class TableManage extends Component {
                             value={this.state.selectedOption}
                             onChange={this.handleChangeSelect}
                             options={this.state.listDoctors}
-                            placeholder={'Chọn bác sĩ'}
+                            placeholder={<FormattedMessage id="admin.manage-doctor.select-doctor" />}
                         />
                     </div>
                     <div className='content-right'>
@@ -328,14 +352,37 @@ class TableManage extends Component {
                         />
                     </div>
                 </div>
+                <div className='row'>
+                    <div className='col-4 form-group'>
+                        <label><FormattedMessage id="admin.manage-doctor.specialty" /></label>
+                        <Select
+                            value={this.state.selectedSpecialty}
+                            onChange={this.handleChangeSelectDoctorInfor}
+                            options={listSpecialty}
+                            placeholder={<FormattedMessage id="admin.manage-doctor.specialty" />}
+                            name="selectedSpecialty"
+                        />                    </div>
+                    <div className='col-4 form-group'>
+                        <label><FormattedMessage id="admin.manage-doctor.select-clinic" /></label>
+                        <Select
+                            value={this.state.selectedClinic}
+                            onChange={this.handleChangeSelectDoctorInfor}
+                            options={listClinic}
+                            placeholder={<FormattedMessage id="admin.manage-doctor.select-clinic" />}
+                            name="selectedClinic"
+                        />
+                    </div>
+                </div>
                 <div className='manage-doctor-editor'>
                     <MdEditor
-                        style={{ height: '500px' }}
+                        style={{ height: '300px' }}
                         renderHTML={text => mdParser.render(text)}
                         onChange={this.handleEditorChange}
                         value={this.state.contentMarkdown}
                     />
                 </div>
+
+
                 <button
                     onClick={() => this.handleSaveContentMarkDown()}
                     className={hasOldData === true ? "save-content-doctor" : "create-content-doctor"}>
