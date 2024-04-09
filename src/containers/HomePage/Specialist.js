@@ -17,7 +17,6 @@ class Specialist extends Component {
 
     async componentDidMount() {
         let res = await getAllSpecialty();
-        console.log('manh hung check res: ', res)
         if (res && res.errCode === 0) {
             this.setState({
                 dataSpecialty: res.data ? res.data : []
@@ -56,7 +55,7 @@ class Specialist extends Component {
                                             <div className='bg-image section-specialist'
                                                 style={{ backgroundImage: `url(${item.image})` }}
                                             />
-                                            <div className='title-image title-specialist '>{item.name}</div>
+                                            <div className='title-image title-specialist'>{item.name}</div>
                                         </div>
                                     )
                                 })

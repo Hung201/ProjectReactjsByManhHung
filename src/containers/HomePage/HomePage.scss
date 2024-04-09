@@ -86,6 +86,14 @@
                              color: #45c3d2;
                          }
                      }
+
+                     &.title-clinic {
+                         padding-right: 50px;
+
+                         &:hover {
+                             color: #45c3d2;
+                         }
+                     }
                  }
 
 
@@ -103,7 +111,7 @@
                      }
 
                      &.section-medical-facility {
-                         background-image: url('../../assets/medical-facility/091211-logo-dong-do.jpg');
+                         //  background-image: url('../../assets/medical-facility/091211-logo-dong-do.jpg');
                      }
 
                      &.section-outstanding-doctor {

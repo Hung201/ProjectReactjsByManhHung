@@ -17,7 +17,7 @@
 
 
         .list-doctor {
-            padding      : 10px 100px !important;
+            padding      : 0 100px;
             background   : #eee;
             border-radius: 10px;
 
@@ -70,5 +70,8 @@
         }
     }
 
-
+    .bg-bottom {
+        background: #eee;
+        height    : 40px;
+    }
 }
