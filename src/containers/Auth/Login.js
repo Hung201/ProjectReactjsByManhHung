@@ -4,6 +4,7 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import './Login.scss';
 import { handleLoginApi } from '../../services/userService';
+// import SignUp from './SignUp';
 
 class Login extends Component {
     constructor(props) {
@@ -12,7 +13,9 @@ class Login extends Component {
             username: '',
             password: '',
             isShowHidePassword: false,
-            errMessage: ''
+            errMessage: '',
+            isOpenModal: false,
+
         }
     }
     handleUserNameOnChangeInput = (event) => {
@@ -43,6 +46,8 @@ class Login extends Component {
         })
         try {
             let data = await handleLoginApi(this.state.username, this.state.password);
+            console.log('check data: ', data)
+
             if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.errMessage
@@ -70,63 +75,89 @@ class Login extends Component {
             this.handleLoginOnClick()
         }
     }
-    render() {
-        return (
-            <div className='login-background'>
-                <div className='login-container'>
-                    <div className='login-content row'>
-                        <div className='col-12 text-center text-login'>Login</div>
-                        <div className='col-12 form-group'>
-                            <input
-                                type='text'
-                                className='form-control'
-                                placeholder="Your name..."
-                                value={this.state.username}
-                                onChange={(event) => this.handleUserNameOnChangeInput(event)}
-                            />
-                        </div>
-                        <div className='col-12 form-group form-password'>
-                            <input type={this.state.isShowHidePassword === true ? 'text' : 'password'}
-                                className='form-control'
-                                placeholder="Your password..."
-                                value={this.state.password}
-                                onChange={(event) => this.handleUserPasswordOnChangeInput(event)}
-                                onKeyDown={(event) => this.handleKeyDown(event)}
+    closeModalClose = () => {
+        this.setState({
+            isOpenModal: false
+        })
+    }
 
-                            />
-                            <div className='eye-show-hide'
-                                onClick={() => this.handleShowHideOnCLick()}>
-                                {this.state.isShowHidePassword === true ?
-                                    <i className="far fa-eye "></i> : <i className="far fa-eye-slash"></i>}
+    handleOnClickSignUp = () => {
+        this.setState({
+            isOpenModal: true
+        })
+    }
+    render() {
+        console.log('chekc error: ', this.state.errMessage)
+        return (
+            <>
+                <div className='login-background'>
+                    <div className='login-container'>
+                        <div className='login-content row'>
+                            <div className='col-12 text-center text-login'>Login</div>
+                            <div className='col-12 form-group'>
+                                <input
+                                    type='text'
+                                    className='form-control'
+                                    placeholder="Your name..."
+                                    value={this.state.username}
+                                    onChange={(event) => this.handleUserNameOnChangeInput(event)}
+                                />
                             </div>
-                        </div>
-                        <div className='col-12 form-error' >
-                            {this.state.errMessage}
-                        </div>
-                        <div className='col-12 form-btn'>
-                            <button
-                                type="button"
-                                className="btn btn-info btn-block btn-round text-white btn-login-content"
-                                onClick={() => this.handleLoginOnClick()}
-                            >Login</button>
-                        </div>
-                        <div className='col-12 text-muted delimiter text-social-network'>
-                            <span className='forgot-password'>Forgot your password?</span>
-                        </div>
-                        <div className="col-12 text-center text-muted delimiter text-social-network">
-                            <span> or use a social network</span>
-                        </div>
-                        <div className='col-12 social-network'>
-                            <i className="fab fa-google-plus-g google"></i>
-                            <i className="fab fa-facebook-f facebook"></i>
-                            <i className="fab fa-twitter twitter"></i>
-                        </div>
-                        <div className="modal-footer d-flex justify-content-center footer-signup">
-                            <div className="signup-section">Not a member yet? <a href="#a" className="text-info"> Sign Up</a>.</div>
+                            <div className='col-12 form-group form-password'>
+                                <input type={this.state.isShowHidePassword === true ? 'text' : 'password'}
+                                    className='form-control'
+                                    placeholder="Your password..."
+                                    value={this.state.password}
+                                    onChange={(event) => this.handleUserPasswordOnChangeInput(event)}
+                                    onKeyDown={(event) => this.handleKeyDown(event)}
+
+                                />
+                                <div className='eye-show-hide'
+                                    onClick={() => this.handleShowHideOnCLick()}>
+                                    {this.state.isShowHidePassword === true ?
+                                        <i className="far fa-eye "></i> : <i className="far fa-eye-slash"></i>}
+                                </div>
+                                <div className='col-12 form-error' >
+                                    {this.state.errMessage}
+                                </div>
+                            </div>
+
+                            <div className='col-12 form-btn'>
+                                <button
+                                    type="button"
+                                    className="btn btn-info btn-block btn-round text-white btn-login-content"
+                                    onClick={() => this.handleLoginOnClick()}
+                                >Login</button>
+                            </div>
+                            <div className='col-12 text-muted delimiter text-social-network'>
+                                <span className='forgot-password'>Forgot your password?</span>
+                            </div>
+                            <div className="col-12 text-center text-muted delimiter text-social-network">
+                                <span> or use a social network</span>
+                            </div>
+                            <div className='col-12 social-network'>
+                                <i className="fab fa-google-plus-g google"></i>
+                                <i className="fab fa-facebook-f facebook"></i>
+                                <i className="fab fa-twitter twitter"></i>
+                            </div>
+                            <div className="modal-footer d-flex justify-content-center footer-signup">
+                                <div className="signup-section">Not a member yet?
+                                    <a href="#a"
+                                        className="text-info"
+                                        onClick={() => this.handleOnClickSignUp()}
+                                    > Sign Up
+                                    </a>
+                                    .
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                {/* <SignUp
+                    isOpenModal={this.state.isOpenModal}
+                    closeModalClose={this.closeModalClose}
+                /> */}
+            </>
         )
     }
 }

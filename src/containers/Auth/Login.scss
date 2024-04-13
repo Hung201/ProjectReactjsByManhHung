@@ -1,19 +1,20 @@
 .login-background {
-    background-color: #7f7f7f;
-    height          : 100vh;
+    height    : 100vh;
+    background: #eee;
 
     .login-container {
         margin          : auto;
         width           : 380px;
-        height          : 440px;
+        height          : 460px;
         background-color: white;
-        border-radius   : 5px;
+        border-radius   : 10px;
         position        : absolute;
         top             : 0;
         bottom          : 0;
         right           : 0;
         left            : 0;
-
+        background-color: #fff;
+        box-shadow      : 0 1px 6px #20212447;
 
         .login-content {
             padding: 25px 20px;
@@ -33,20 +34,23 @@
                     cursor  : pointer;
                     position: absolute;
                     right   : 38px;
-                    top     : 136px;
+                    top     : 16px;
+                }
+
+                .form-error {
+                    color    : rgb(255, 50, 50);
+                    font-size: 12px;
                 }
             }
 
-            .form-error {
-                color       : rgb(255, 50, 50);
-                padding-left: 18px
-            }
+
 
             .btn-login-content {
                 width        : 95%;
                 margin-left  : 8px;
                 margin-top   : 5px;
-                border-radius: 50px;
+                border-radius: 8px;
+                background   : #3b71ca;
             }
 
             .text-social-network {
@@ -64,43 +68,43 @@
 
                 .google {
                     cursor         : pointer;
-                    background     : #dc5252;
-                    font-size      : 25px;
+                    background     : white;
+                    font-size      : 15px;
                     border-radius  : 50%;
-                    height         : 50px;
-                    width          : 50px;
+                    height         : 40px;
+                    width          : 40px;
                     display        : flex;
                     justify-content: center;
                     align-items    : center;
-                    color          : white;
+                    color          : #3b71ca;
                     margin-right   : 15px;
                 }
 
                 .facebook {
                     cursor         : pointer;
-                    background     : #535fe3;
-                    font-size      : 25px;
+                    background     : white;
+                    font-size      : 15px;
                     border-radius  : 50%;
-                    height         : 50px;
-                    width          : 50px;
+                    height         : 40px;
+                    width          : 40px;
                     display        : flex;
                     justify-content: center;
                     align-items    : center;
-                    color          : white;
+                    color          : #3b71ca;
                     margin-right   : 15px;
                 }
 
                 .twitter {
                     cursor         : pointer;
-                    background     : #63aaf1;
-                    font-size      : 25px;
+                    background     : white;
+                    font-size      : 15px;
                     border-radius  : 50%;
-                    height         : 50px;
-                    width          : 50px;
+                    height         : 40px;
+                    width          : 40px;
                     display        : flex;
                     justify-content: center;
                     align-items    : center;
-                    color          : white;
+                    color          : #3b71ca;
                 }
             }
 
@@ -108,7 +112,9 @@
                 margin-top: 30px;
 
                 .signup-section {
-                    .text-info {}
+                    .text-info {
+                        color: #3b71ca !important;
+                    }
                 }
             }
         }

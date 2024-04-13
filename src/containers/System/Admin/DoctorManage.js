@@ -179,6 +179,8 @@ class TableManage extends Component {
             selectedPrice: this.state.selectedPrice.value,
             selectedPayment: this.state.selectedPayment.value,
             selectedProvince: this.state.selectedProvince.value,
+            selectedClinic: this.state.selectedClinic.value,
+
             nameClinic: this.state.nameClinic,
             addressClinic: this.state.addressClinic,
             note: this.state.note,
@@ -298,6 +300,7 @@ class TableManage extends Component {
 
     render() {
         let { hasOldData, listSpecialty, listClinic } = this.state;
+        console.log('chekc list: ', listClinic)
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
