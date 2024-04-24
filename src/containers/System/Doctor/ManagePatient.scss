@@ -12,7 +12,7 @@
         .table-manage-patient {
 
             table,
-            tbody,
+            th,
             td {
                 border         : 1px solid black;
                 border-collapse: collapse;
@@ -22,6 +22,27 @@
             td {
                 padding   : 5px;
                 text-align: left;
+            }
+
+            button {
+                border : none;
+                outline: none;
+                cursor : pointer;
+            }
+
+            .mp-btn-confirm {
+                margin-right : 10px;
+                height       : 30px;
+                padding      : 0 8px;
+                border-radius: 3px;
+                background   : orange;
+            }
+
+            .mp-btn-remedy {
+                padding      : 0 8px;
+                height       : 30px;
+                border-radius: 3px;
+                background   : #39dca0;
             }
         }
     }
