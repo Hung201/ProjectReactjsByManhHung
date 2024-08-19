@@ -1,5 +1,6 @@
 {
     "headerhome": {
+        "home": "Home",
         "specialist": "Specialist",
         "search-doctor": "Find doctors by specialty",
         "health-facilities": "Health facilities",
@@ -33,7 +34,7 @@
             "manage-specialist": "Manage specialist",
             "handbook": "Handbook",
             "manage-handbook": "Manage handbook",
-            "crud-redux": "CRUD Redux",
+            "crud-redux": "Manage user",
             "manage-schedule": "Manage Doctor's schedule",
             "manage-system": "Manage system"
         },

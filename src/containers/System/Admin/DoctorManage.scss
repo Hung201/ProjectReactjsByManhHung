@@ -4,9 +4,10 @@
     .manage-doctor-title {
         text-align    : center;
         margin        : 15px 0;
-        font-size     : 20px;
+        font-size     : 24px;
         text-transform: uppercase;
         font-weight   : 600;
+        color         : #0071ba;
     }
 
     .save-content-doctor {
@@ -55,5 +56,19 @@
         .content-right {
             width: 65%;
         }
+    }
+
+    .more-infor-extra {
+        .form-group {
+            margin-bottom: 15px;
+
+            label {
+                margin-bottom: 6px;
+            }
+        }
+    }
+
+    .manage-doctor-editor {
+        margin-top: 30px;
     }
 }

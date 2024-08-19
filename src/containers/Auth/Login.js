@@ -4,7 +4,9 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import './Login.scss';
 import { handleLoginApi } from '../../services/userService';
-// import SignUp from './SignUp';
+import SignUp from './SignUp';
+import { emitter } from '../../utils/emitter';
+
 
 class Login extends Component {
     constructor(props) {
@@ -17,7 +19,18 @@ class Login extends Component {
             isOpenModal: false,
 
         }
+        this.listenToEmitter()
+
     }
+
+    listenToEmitter = () => {
+        emitter.on('EVENT_OFF_MODAL', () => {
+            this.setState({
+                isOpenModal: false
+            })
+        })
+    }
+
     handleUserNameOnChangeInput = (event) => {
         this.setState({
             username: event.target.value
@@ -86,8 +99,8 @@ class Login extends Component {
             isOpenModal: true
         })
     }
+
     render() {
-        console.log('chekc error: ', this.state.errMessage)
         return (
             <>
                 <div className='login-background'>
@@ -153,10 +166,10 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
-                {/* <SignUp
+                <SignUp
                     isOpenModal={this.state.isOpenModal}
                     closeModalClose={this.closeModalClose}
-                /> */}
+                />
             </>
         )
     }

@@ -4,13 +4,12 @@ import './ManageSchedule.scss';
 import { FormattedMessage } from 'react-intl';
 import Select from 'react-select';
 import * as actions from "../../../store/actions";
-import { CRUD_ACTIONS, LANGUAGES, dateFormat } from '../../../utils';
+import { CRUD_ACTIONS, LANGUAGES, dateFormat, USER_ROLE } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
 import { toast } from "react-toastify";
 import _ from 'lodash';
 import { saveBulkScheduleDoctor } from '../../../services/userService';
-
 
 
 
@@ -22,14 +21,31 @@ class ManageSchedule extends Component {
             listDoctors: [],
             selectedDoctor: {},
             currentDate: '',
-            rangeTime: []
+            rangeTime: [],
+            roleUser: []
         }
     }
 
     componentDidMount() {
         this.props.fetchAllDoctor();
         this.props.fetchAllScheduleTime();
+        let { userInfo } = this.props;
+        let roleUser = '';
 
+        if (userInfo && !_.isEmpty(userInfo)) {
+            let role = userInfo.roleId;
+            if (role === USER_ROLE.ADMIN) {
+                roleUser = '1';
+            }
+
+            if (role === USER_ROLE.DOCTOR) {
+                roleUser = '2';
+            }
+        }
+
+        this.setState({
+            roleUser: roleUser
+        })
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -96,7 +112,8 @@ class ManageSchedule extends Component {
             })
 
             this.setState({
-                rangeTime: rangeTime
+                rangeTime: rangeTime,
+
             })
         }
     }
@@ -137,6 +154,15 @@ class ManageSchedule extends Component {
         })
 
         if (res && res.errCode === 0) {
+            let data = this.props.allScheduleTime;
+            if (data && data.length > 0) {
+                data = data.map(item => ({ ...item, isSelected: false }))
+            }
+            this.setState({
+                rangeTime: data,
+                selectedDoctor: {},
+                currentDate: '',
+            })
             toast.success("Save Infor Succeed!");
         } else {
             toast.error("Error saveBulkScheduleDoctor");
@@ -145,10 +171,18 @@ class ManageSchedule extends Component {
     }
 
     render() {
-        console.log('check props: ', this.state)
-        let { rangeTime, selectedDoctor, currentDate } = this.state;
-        let { language } = this.props;
-
+        let { rangeTime, selectedDoctor, currentDate, roleUser } = this.state;
+        let { language, userInfo } = this.props;
+        let user = {
+            label: `${userInfo.lastName} ${userInfo.firstName}`,
+            id: userInfo.id
+        }
+        let userOption = [{
+            label: `${userInfo.lastName} ${userInfo.firstName}`,
+            value: userInfo.id
+        }]
+        console.log('check userOption: ', userOption)
+        console.log('check this.state.listDoctors: ', this.state.listDoctors)
         return (
             <div className='manage-schedule-container'>
                 <div className='m-s-title'>
@@ -159,9 +193,9 @@ class ManageSchedule extends Component {
                         <div className='col-6 form-group'>
                             <label><FormattedMessage id='manage-schedule.choose-doctor' /></label>
                             <Select
-                                value={selectedDoctor}
+                                value={roleUser === '1' ? selectedDoctor : user}
                                 onChange={this.handleChangeSelect}
-                                options={this.state.listDoctors}
+                                options={roleUser === '1' ? this.state.listDoctors : userOption}
                             />
                         </div>
                         <div className='col-6 form-group'>
@@ -211,7 +245,7 @@ const mapStateToProps = state => {
         allDoctor: state.admin.allDoctor,
         language: state.app.language,
         allScheduleTime: state.admin.allScheduleTime,
-
+        userInfo: state.user.userInfo
     };
 };
 

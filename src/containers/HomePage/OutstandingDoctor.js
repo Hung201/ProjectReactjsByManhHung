@@ -70,7 +70,6 @@ class OutstandingDoctor extends Component {
                                                     />
                                                 </div>
                                                 <div className='title-name-image'>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
-                                                <div className='title-image'>Co Xuong Khop</div>
                                             </div>
                                         </div>
                                     )

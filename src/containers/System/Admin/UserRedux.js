@@ -208,15 +208,12 @@ class UserRedux extends Component {
             <>
                 <div className="user-redux-container" >
                     <div className='title'>
-                        Học React-Redux cùng Mạnh Hùng
+                        <FormattedMessage id="menu.admin.crud-redux" />
                     </div>
 
                     <div className='user-redux-body'>
                         <div className='row'>
                             <form className="row g-3">
-                                <div className="col-12">
-                                    <label className="form-label">Thêm mới người dùng</label>
-                                </div>
                                 <div className="col-3">
                                     <label className="form-label"><FormattedMessage id="manage-user.email" /></label>
                                     <input
@@ -356,7 +353,7 @@ class UserRedux extends Component {
                     } */}
 
                 </div>
-                <div className='col-12 mb-5'>
+                <div className='col-12 mb-5 mt-5'>
                     <TableManage
                         editUserFromParent={this.editUserFromParent}
                     />

@@ -25,7 +25,6 @@ class DetailClinic extends Component {
             let res = await getDetailClinicById({
                 id: id,
             });
-            console.log('check res: ', res)
 
             if (res && res.errCode === 0) {
                 let data = res.data;
@@ -57,7 +56,6 @@ class DetailClinic extends Component {
     render() {
         let { arrDoctorId, dataDetailClinic } = this.state;
         let { language } = this.props;
-        console.log('check data: ', this.state)
         return (
             <div className='detail-specialty-container'>
                 <HeaderHome />

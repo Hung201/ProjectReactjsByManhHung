@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
-import './ManageClinic.scss';
+import './ManageHandbook.scss'
 import MarkdownIt from 'markdown-it';
-import MdEditor from 'react-markdown-editor-lite';
 import { LANGUAGES, MANAGE_ACTIONS, CommonUtils } from '../../../utils';
-import { createNewClinic } from '../../../services/userService';
+import { createNewHandbook } from '../../../services/userService';
+import MdEditor from 'react-markdown-editor-lite';
 import { toast } from 'react-toastify';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
-class ManageClinic extends Component {
+
+class ManageHandbook extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             name: '',
-            address: '',
             imageBase64: '',
             descriptionHTML: '',
             descriptionMarkdown: ''
@@ -29,7 +29,6 @@ class ManageClinic extends Component {
 
         }
     }
-
 
     handleOnChangeInput = (event, id) => {
         let stateCopy = { ...this.state }
@@ -57,14 +56,13 @@ class ManageClinic extends Component {
         }
     }
 
-    handelSaveNewClinic = async () => {
-        let res = await createNewClinic(this.state)
+    handleSaveNewHandbook = async () => {
+        let res = await createNewHandbook(this.state)
         if (res && res.errCode === 0) {
-            toast.success('Add new clinic succeeds!')
+            toast.success('Add new specialty succeeds!')
             this.setState({
                 name: '',
                 imageBase64: '',
-                address: '',
                 descriptionHTML: '',
                 descriptionMarkdown: ''
             })
@@ -75,11 +73,11 @@ class ManageClinic extends Component {
     }
     render() {
         return (
-            <div className='manage-specialty-container'>
-                <div className='ms-title'>Quản lý phòng khám</div>
-                <div className='add-new-specialty row'>
-                    <div className='col-6 form-group '>
-                        <label>Tên phòng khám</label>
+            <div className='manage-handbook-container'>
+                <div className='mhb-title'>Quản lý cẩm nang</div>
+                <div className='add-new-handbook row'>
+                    <div className='col-6 form-group ip-handbook'>
+                        <label>Tên cẩm nang</label>
                         <input
                             className='form-control'
                             type='text'
@@ -87,21 +85,12 @@ class ManageClinic extends Component {
                             onChange={(event) => this.handleOnChangeInput(event, 'name')}
                         />
                     </div>
-                    <div className='col-6 mc-picture'>
-                        <label>Ảnh phòng khám</label>
+                    <div className='col-6 ip-file-handbook'>
+                        <label>Ảnh cẩm nang</label>
                         <input
                             className='form-control-file'
                             type='file'
                             onChange={(event) => this.handleOnchangeImage(event)}
-                        />
-                    </div>
-                    <div className='col-6 form-group mc-address'>
-                        <label>Địa chỉ phòng khám</label>
-                        <input
-                            className='form-control'
-                            type='text'
-                            value={this.state.address}
-                            onChange={(event) => this.handleOnChangeInput(event, 'address')}
                         />
                     </div>
                     <div className='col-12'>
@@ -115,8 +104,8 @@ class ManageClinic extends Component {
                     <div className='col-12'>
                         <button
                             type="button"
-                            className='btn btn-primary btn-lg btn-save-m-specialty'
-                            onClick={() => this.handelSaveNewClinic()}
+                            className='btn btn-primary btn-lg btn-save-handbook'
+                            onClick={() => this.handleSaveNewHandbook()}
                         >Save</button>
                     </div>
                 </div>
@@ -136,4 +125,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageClinic);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageHandbook);

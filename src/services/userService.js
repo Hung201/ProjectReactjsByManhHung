@@ -19,6 +19,10 @@ const deleteUserService = (userId) => {
         }
     });
 }
+const handleSignUpApi = (data) => {
+    return axios.post('/api/sign-up', data)
+
+}
 
 const getAllCodeService = (inputType) => {
     return axios.get(`/api/get-allcodes?type=${inputType}`, { type: inputType })
@@ -90,11 +94,21 @@ const getAllPatientForDoctor = (data) => {
 const postSendRemedy = (data) => {
     return axios.post('/api/send-remedy', data)
 }
+const createNewHandbook = (data) => {
+    return axios.post('/api/create-new-handbook', data)
+}
+const getAllHandbook = () => {
+    return axios.get(`/api/get-all-handbook`)
+}
+const getDetailHandbookById = (data) => {
+    return axios.get(`/api/get-all-detail-handbook-by-id?id=${data.id}`)
+}
 export {
     handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserService,
     getAllcodeService, getTopDoctorHomeService, getAllDoctorService, saveDetailDoctorService,
     getDetailInforDoctorService, getAllCodeService, getScheduleDoctorByDate, saveBulkScheduleDoctor,
     getExtraInforDoctorById, getProfileDoctorById, postPatientBookingAppointment, postVerifyBookAppointment,
     createNewSpecialty, getAllSpecialty, getDetailSpecialtyById, createNewClinic,
-    getAllClinic, getDetailClinicById, getAllPatientForDoctor, postSendRemedy
+    getAllClinic, getDetailClinicById, getAllPatientForDoctor, postSendRemedy, handleSignUpApi, createNewHandbook,
+    getAllHandbook, getDetailHandbookById
 }

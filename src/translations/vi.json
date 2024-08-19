@@ -1,5 +1,6 @@
 {
     "headerhome": {
+        "home": "Trang chủ",
         "specialist": "Chuyên khoa",
         "search-doctor": "Tìm bác sĩ theo chuyên khoa",
         "health-facilities": "Cơ sở y tế",
@@ -33,7 +34,7 @@
             "manage-specialist": "Quản lý chuyên khoa",
             "handbook": "Cẩm nang",
             "manage-handbook": "Quản lý cẩm nang",
-            "crud-redux": "CRUD Redux",
+            "crud-redux": "Quản lý người dùng",
             "manage-schedule": "Quản lý kế hoạch khám bệnh",
             "manage-system": "Quản lý hệ thống"
         },

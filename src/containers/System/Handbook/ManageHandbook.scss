@@ -1,7 +1,5 @@
-.manage-specialty-container {
-    padding: 0 15px;
-
-    .ms-title {
+.manage-handbook-container {
+    .mhb-title {
         text-align    : center;
         margin        : 15px 0;
         font-size     : 20px;
@@ -10,22 +8,21 @@
         color         : #0071ba;
     }
 
-    .add-new-specialty {
-        .ip-ans {
+    .add-new-handbook {
+        .ip-handbook {
             margin-bottom: 20px;
         }
 
-        .ip-ps {
+        .ip-file-handbook {
             display       : flex;
             flex-direction: column;
             margin-top    : 6px;
         }
 
-        .btn-save-specialty {
+        .btn-save-handbook {
             margin   : 15px 0;
             min-width: 75px;
         }
     }
 
-    .all-specialty {}
 }
