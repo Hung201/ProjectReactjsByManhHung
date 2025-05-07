@@ -7,7 +7,7 @@ import { Modal } from 'reactstrap';
 import { handleSignUpApi } from '../../services/userService';
 import { toast } from "react-toastify";
 import { emitter } from '../../utils/emitter';
-
+import { LANGUAGES } from '../../utils';
 
 class SignUp extends Component {
     constructor(props) {
@@ -15,13 +15,43 @@ class SignUp extends Component {
         this.state = {
             username: '',
             password: '',
-            passwordConfirm: '',
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            address: '',
+            gender: '',
             isShowHidePassword: false,
             isShowHidePasswordConfirm: false,
             errMessage: '',
         }
     }
+    componentDidMount() {
+        this.props.fetchGenderStart();
+    }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.genderRedux !== this.props.genderRedux) {
+            let arrGenders = this.props.genderRedux
+            this.setState({
+                genderArr: arrGenders,
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : '',
+            })
+        }
+        if (prevProps.users !== this.props.users) {
+            let arrGenders = this.props.genderRedux
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                address: '',
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : '',
+            })
+        }
+
+
+    }
 
 
     handleUserNameOnChangeInput = (event) => {
@@ -35,36 +65,54 @@ class SignUp extends Component {
             password: event.target.value
         })
     }
-    handleUserPasswordConfirmOnChangeInput = (event) => {
-        this.setState({
-            passwordConfirm: event.target.value
-        })
-    }
 
-    handleSignUpOnClick = async () => {
-        if (this.state.password === this.state.passwordConfirm) {
-            let res = await handleSignUpApi({
-                email: this.state.username,
-                password: this.state.password
-            })
-            if (res && res.errCode === 0) {
-                toast.success('Sign up successed!')
-                emitter.emit('EVENT_OFF_MODAL')
-                this.setState({
-                    username: '',
-                    password: '',
-                    passwordConfirm: ''
-                })
-            } else if (res && res.errCode === 1) {
-                toast.error(res.errMessage)
+
+    checkValidateInput = () => {
+        let isValid = true;
+        let arrChecks = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address'];
+        let arrAlert = [];
+        let point = 0;
+        for (let i = 0; i < arrChecks.length; i++) {
+            if (!this.state[arrChecks[i]]) {
+                point++
+                isValid = false;
+                arrAlert.push(arrChecks[i])
             }
-            else {
-                toast.error('Sign up failed!')
-            }
-        } else {
-            toast.error('The password entered is incorrect!')
         }
+        if (point !== 0) {
+            alert('This input is required: ' + arrAlert)
+        }
+        return isValid
+    }
+    handleSignUpOnClick = async () => {
 
+        let res = await handleSignUpApi({
+            email: this.state.username,
+            password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            phonenumber: this.state.phoneNumber,
+            gender: this.state.gender,
+        })
+        if (res && res.errCode === 0) {
+            toast.success('Sign up successed!')
+            emitter.emit('EVENT_OFF_MODAL')
+            this.setState({
+                username: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                address: '',
+                phonenumber: '',
+                gender: '',
+            })
+        } else if (res && res.errCode === 1) {
+            toast.error(res.errMessage)
+        }
+        else {
+            toast.error('Sign up failed!')
+        }
 
     }
 
@@ -85,10 +133,22 @@ class SignUp extends Component {
             this.handleLoginOnClick()
         }
     }
+    onChangeInput = (event, id) => {
+        let copyState = { ...this.state };
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        })
+
+    }
 
 
     render() {
+        let genders = this.state.genderArr;
+        let language = this.props.language;
         let { isOpenModal, closeModalClose, handleKeyDown } = this.props;
+        let { email, password, firstName, lastName, phoneNumber,
+            address, gender } = this.state
         return (
             <Modal
                 isOpen={isOpenModal}
@@ -130,22 +190,55 @@ class SignUp extends Component {
                                         <i className="far fa-eye "></i> : <i className="far fa-eye-slash"></i>}
                                 </div>
                             </div>
-                            {/* Confirm password */}
-                            <div className='col-12 form-group form-password'>
-                                <input type={this.state.isShowHidePasswordConfirm === true ? 'text' : 'password'}
-                                    className='form-control'
-                                    placeholder="Confirm Password"
-                                    value={this.state.passwordConfirm}
-                                    onChange={(event) => this.handleUserPasswordConfirmOnChangeInput(event)}
-                                    onKeyDown={(event) => this.handleKeyDown(event)}
-
-                                />
-                                <div className='eye-show-hide'
-                                    onClick={() => this.handleShowHidePasswordConfirmOnCLick()}>
-                                    {this.state.isShowHidePasswordConfirm === true ?
-                                        <i className="far fa-eye "></i> : <i className="far fa-eye-slash"></i>}
-                                </div>
+                            <div className="col-6">
+                                <input
+                                    placeholder="First Name"
+                                    type="text"
+                                    className="form-control"
+                                    value={firstName}
+                                    onChange={(event) => { this.onChangeInput(event, 'firstName') }} />
                             </div>
+                            <div className="form-ln col-6">
+                                <input
+                                    placeholder="Last Name"
+                                    type="text"
+                                    className="form-control"
+                                    value={lastName}
+                                    onChange={(event) => { this.onChangeInput(event, 'lastName') }} />
+                            </div>
+                            <div className="col-12">
+                                <input
+                                    placeholder="Phone"
+                                    type="text"
+                                    className="form-control"
+                                    value={phoneNumber}
+                                    onChange={(event) => { this.onChangeInput(event, 'phoneNumber') }} />
+                            </div>
+                            <div className="col-12">
+                                <input
+                                    placeholder="Address"
+                                    type="text"
+                                    className="form-control"
+                                    value={address}
+                                    onChange={(event) => { this.onChangeInput(event, 'address') }} />
+                            </div>
+                            <div className="col-6">
+                                <select
+                                    placeholder='Gender'
+                                    className="form-control"
+                                    value={gender}
+                                    onChange={(event) => { this.onChangeInput(event, 'gender') }}>
+                                    {genders && genders.length > 0 &&
+                                        genders.map((item, index) => {
+                                            return (
+                                                <option key={index} value={item.keyMap}>
+                                                    {language === LANGUAGES.VI ? item.ValueVi : item.valueEn}
+                                                </option>
+                                            )
+                                        })}
+                                </select>
+                            </div>
+
                             <div className='col-12 form-error' >
                                 {this.state.errMessage}
                             </div>
@@ -167,14 +260,15 @@ class SignUp extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language
+        language: state.app.language,
+        genderRedux: state.admin.genders,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-
+        fetchGenderStart: () => dispatch(actions.fetchGenderStart()),
     };
 };
 

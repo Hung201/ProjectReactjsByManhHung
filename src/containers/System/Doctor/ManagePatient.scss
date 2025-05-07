@@ -8,14 +8,20 @@ div._loading_overlay_wrapper {
 
 .manage-patient-container {
     .m-p-title {
-        font-size     : 15px;
-        margin        : 10px 0;
         text-align    : center;
+        margin        : 15px 0;
+        font-size     : 24px;
         text-transform: uppercase;
+        font-weight   : 600;
+        color         : #0071ba;
     }
 
     .manage-patient-body {
         padding: 0 20px;
+
+        .choose-day {
+            margin-bottom: 10px;
+        }
 
         .table-manage-patient {
 

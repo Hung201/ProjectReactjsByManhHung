@@ -1,6 +1,6 @@
      //reset slick slider css
      .slick-prev {
-         left           : -15px !important;
+         left           : -50px !important;
          z-index        : 1000 !important;
          width          : 40px !important;
          height         : 40px !important;
@@ -11,6 +11,7 @@
          background     : #ffffff !important;
          border         : 2px solid #d7d7d7 !important;
          margin-left    : -35px !important;
+         transform      : translateY(-50%);
 
          &:hover {
              background: #eceaea !important;
@@ -24,7 +25,7 @@
      }
 
      .slick-next {
-         right          : 0 !important;
+         right          : -50px !important;
          z-index        : 1000 !important;
          width          : 40px !important;
          height         : 40px !important;
@@ -33,6 +34,8 @@
          align-items    : center !important;
          border         : 2px solid #d7d7d7 !important;
          background     : #ffffff !important;
+         top            : 50% !important;
+         transform      : translateY(-50%);
 
          &:hover {
              background: #eceaea !important;

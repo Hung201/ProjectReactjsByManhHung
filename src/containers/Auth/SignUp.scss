@@ -3,8 +3,7 @@
 
     .sign-up-container {
         margin          : auto;
-        width           : 380px;
-        height          : 460px;
+        height          : 482px;
         background-color: white;
         border-radius   : 10px;
         position        : absolute;
@@ -20,6 +19,10 @@
         .sign-up-content {
             padding: 15px 20px;
 
+            .form-ln {
+                margin-left: -12px;
+            }
+
             .sign-up-modal-header {
                 padding-right: 10px;
 
@@ -34,8 +37,7 @@
             }
 
             .text-sign-up {
-                font-size     : 24px;
-                padding-bottom: 10px;
+                font-size: 24px;
             }
 
             .form-control {
@@ -47,8 +49,8 @@
                 .eye-show-hide {
                     cursor  : pointer;
                     position: absolute;
-                    right   : 38px;
-                    top     : 16px;
+                    right   : 50px;
+                    top     : 165px;
                 }
             }
 
@@ -60,10 +62,12 @@
             .btn-sign-up-content {
                 width        : 95%;
                 margin-left  : 8px;
-                margin-top   : 5px;
+                margin-top   : 10px;
                 border-radius: 8px;
                 background   : #3b71ca;
             }
         }
+
+
     }
 }

@@ -1,5 +1,27 @@
 .detail-doctor-container {
-    height: 500px;
+    height     : 500px;
+    font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+
+    .intro-doctor,
+    .infor-doctor {
+        color      : #222;
+        font-size  : 17px;
+        line-height: 1.7;
+
+        h1,
+        h2,
+        h3 {
+            font-size    : 26px;
+            font-weight  : 700;
+            color        : #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        b,
+        strong {
+            color: #2d9cdb;
+        }
+    }
 
     .intro-doctor {
         display      : flex;

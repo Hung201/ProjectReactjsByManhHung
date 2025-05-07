@@ -123,7 +123,7 @@ class ManagePatient extends Component {
                             Quản lý bệnh nhân khám bệnh
                         </div>
                         <div className='manage-patient-body row'>
-                            <div className='col-4 form-group'>
+                            <div className='choose-day col-4 form-group'>
                                 <label>Chọn ngày khám</label>
                                 <DatePicker
                                     onChange={this.handleOnChangeDatePicker}
